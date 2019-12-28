@@ -1,4 +1,4 @@
-package cl.usach.fingesoft.model;
+package cl.usach.fingesoft.data;
 
 import java.util.List;
 

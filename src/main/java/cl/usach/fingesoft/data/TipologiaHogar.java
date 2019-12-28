@@ -1,4 +1,4 @@
-package cl.usach.fingesoft.model;
+package cl.usach.fingesoft.data;
 
 public class TipologiaHogar {
 
