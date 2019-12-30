@@ -48,6 +48,31 @@ public class RepositoryProvincia {
 	}
 	
 	
+	public Provincia findPronviciaByCodigo(int codigo) {
+		Provincia nueva = new Provincia();
+		String nombreArchivo = "Microdato_Censo2017-Provincias.csv";
+		String texto = "";
+		String[] info;
+		try {
+			FileReader archivo = new FileReader(RepositoryComuna.getRutaArchivos() + nombreArchivo);
+			BufferedReader contenido = new BufferedReader(archivo);
+			texto = contenido.readLine();
+			while((texto = contenido.readLine()) != null) {
+				info = texto.split(";");
+				if(codigo == Integer.parseInt(info[0])) {
+					nueva.setNumero(codigo);
+					nueva.setNombre(info[1]);
+				}
+			}
+			contenido.close();
+		}
+		catch (Exception e) {
+			LOG.error("Error al abrir el archivo " + nombreArchivo);
+		}
+		return nueva;
+	}
+	
+	
 	public Provincia findComunas(Provincia nombre) {
 		String nombreArchivo = "Microdato_Censo2017-Urbano.csv"; 
 		String texto = "";
