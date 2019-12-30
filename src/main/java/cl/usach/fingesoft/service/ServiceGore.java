@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cl.usach.fingesoft.model.Provincia;
+import cl.usach.fingesoft.model.Region;
 import cl.usach.fingesoft.repository.RepositoryHogar;
 import cl.usach.fingesoft.repository.RepositoryPersona;
 import cl.usach.fingesoft.repository.RepositoryProvincia;
 import cl.usach.fingesoft.repository.RepositoryRegion;
+import cl.usach.fingesoft.repository.RepositoryRegion2;
 import cl.usach.fingesoft.repository.RepositoryVivienda;
 
 @Service
@@ -22,10 +24,10 @@ public class ServiceGore {
 	
 	@Autowired
 	private RepositoryHogar repoHogar;
-	
-	@Autowired
-	private RepositoryRegion repoRegion;
 	**/
+	@Autowired
+	private RepositoryRegion2 repoRegion;
+	
 	@Autowired
 	private RepositoryProvincia repoProvincia;
 	
@@ -35,4 +37,9 @@ public class ServiceGore {
 		return nueva;
 	}
 
+	public Region getRegionByNombre(String nombre) {
+		Region nueva = repoRegion.findDatos(nombre);
+		nueva = repoRegion.findProvincias(nueva);
+		return nueva;
+	}
 }

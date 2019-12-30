@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import cl.usach.fingesoft.model.Provincia;
+import cl.usach.fingesoft.model.Region;
 import cl.usach.fingesoft.service.ServiceGore;
 
 @RestController
@@ -21,8 +22,15 @@ public class GoreController {
 	
 	//Test lectura de archivos//
 	@PostMapping("/test/datos_provincia")
-	public Provincia getDatos(@RequestBody Map<String,String> body) {
+	public Provincia getDatosProvincia(@RequestBody Map<String,String> body) {
 		String nombre = body.get("Provincia");
 		return serviceGore.getProvinciaByNombre(nombre);
 	}
+	
+	@PostMapping("/test/datos_region")
+	public Region getDatosRegion(@RequestBody Map<String,String> body) {
+		String nombre = body.get("Region");
+		return serviceGore.getRegionByNombre(nombre);
+	}
+	
 }
