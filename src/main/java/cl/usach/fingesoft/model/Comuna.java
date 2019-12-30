@@ -6,6 +6,7 @@ public class Comuna {
 	
 	private String nombre;
 	private int numero;
+	private List<Integer> dc;
 	private List<String> localidades;
 	
 	
@@ -26,6 +27,12 @@ public class Comuna {
 	}
 	public void setLocalidades(List<String> localidades) {
 		this.localidades = localidades;
+	}
+	public List<Integer> getDc() {
+		return dc;
+	}
+	public void setDc(List<Integer> dc) {
+		this.dc = dc;
 	}
 
 	

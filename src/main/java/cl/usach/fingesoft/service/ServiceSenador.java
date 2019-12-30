@@ -11,6 +11,7 @@ import cl.usach.fingesoft.repository.RepositoryVivienda;
 @Service
 public class ServiceSenador {
 
+	/**
 	@Autowired
 	private RepositoryPersona repoPersona;
 	
@@ -22,6 +23,6 @@ public class ServiceSenador {
 	
 	@Autowired
 	private RepositoryCircunscripcion repoCircusncripcion;
-	
+	**/
 	
 }

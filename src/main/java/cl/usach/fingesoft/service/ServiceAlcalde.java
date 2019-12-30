@@ -3,6 +3,7 @@ package cl.usach.fingesoft.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cl.usach.fingesoft.model.Comuna;
 import cl.usach.fingesoft.repository.RepositoryComuna;
 import cl.usach.fingesoft.repository.RepositoryHogar;
 import cl.usach.fingesoft.repository.RepositoryPersona;
@@ -11,7 +12,7 @@ import cl.usach.fingesoft.repository.RepositoryVivienda;
 @Service
 public class ServiceAlcalde {
 
-	@Autowired
+	/**@Autowired
 	private RepositoryPersona repoPersona;
 	
 	@Autowired
@@ -19,7 +20,20 @@ public class ServiceAlcalde {
 	
 	@Autowired
 	private RepositoryHogar repoHogar;
-	
+	**/
 	@Autowired
 	private RepositoryComuna repoComuna;
+	
+	
+	public Comuna getComunaByNombre(String nombre) {
+		Comuna nueva = repoComuna.findDatos(nombre);
+		nueva = repoComuna.findLocalidades(nueva);
+		return nueva;
+	}
+	
+	public Comuna getComunaByCodigo(int codigo) {
+		Comuna nueva = repoComuna.findComunaByCodigo(codigo);
+		nueva = repoComuna.findLocalidades(nueva);
+		return nueva;
+	}
 }
