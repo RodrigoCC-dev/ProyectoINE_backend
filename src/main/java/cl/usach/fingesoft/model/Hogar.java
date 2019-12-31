@@ -9,6 +9,7 @@ public class Hogar {
 	private int area;
 	private int zcLoc;
 	private int idZonaLoc;
+	private int nViv;
 	private int nHogar;
 	private int tipoHogar;
 	private int tipoOperativo;
@@ -73,6 +74,12 @@ public class Hogar {
 	}
 	public void setTipoOperativo(int tipoOperativo) {
 		this.tipoOperativo = tipoOperativo;
+	}
+	public int getnViv() {
+		return nViv;
+	}
+	public void setnViv(int nViv) {
+		this.nViv = nViv;
 	}
 	
 	

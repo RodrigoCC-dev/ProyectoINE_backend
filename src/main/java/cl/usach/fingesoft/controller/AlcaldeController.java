@@ -1,15 +1,18 @@
 package cl.usach.fingesoft.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import cl.usach.fingesoft.model.Comuna;
+import cl.usach.fingesoft.model.Hogar;
 import cl.usach.fingesoft.service.ServiceAlcalde;
 
 @RestController
@@ -31,4 +34,11 @@ public class AlcaldeController {
 		int codigo = Integer.parseInt(body.get("codigo"));
 		return serviceAlcalde.getComunaByCodigo(codigo);
 	}
+	
+	//Test//
+	@GetMapping("/test/hogares")
+	public List<Hogar> getHogares(){
+		return serviceAlcalde.getHogares();
+	}
 }
+
