@@ -24,7 +24,7 @@ public class RepositoryDistrito {
 	
 	public Distrito findDistrito(int numero) {
 		Distrito nuevo = new Distrito();
-		String nombreArchivo = "División_Politica-Chile.csv";
+		String nombreArchivo = "Division_Politica-Chile.csv";
 		String texto = "";
 		String[] info;
 		List<Comuna> comunas = new ArrayList<Comuna>();

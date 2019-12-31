@@ -20,7 +20,7 @@ public class SenadorController {
 	ServiceSenador serviceSenador;
 	
 	
-	@PostMapping("/test/Circunscripcion")
+	@PostMapping("/test/circunscripcion")
 	public Circunscripcion getDatosCircunscricpion(@RequestBody Map<String,String> body) {
 		String numero = body.get("Circunscripcion");
 		return serviceSenador.getCircunscripcion(Integer.parseInt(numero));

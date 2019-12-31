@@ -24,7 +24,7 @@ public class RepositoryCircunscripcion {
 	
 	public Circunscripcion findCircunscripcion(int numero) {
 		Circunscripcion nueva = new Circunscripcion();
-		String nombreArchivo = "División_Politica-Chile.csv";
+		String nombreArchivo = "Division_Politica-Chile.csv";
 		String texto = "";
 		String[] info;
 		List<Comuna> comunas = new ArrayList<Comuna>();
