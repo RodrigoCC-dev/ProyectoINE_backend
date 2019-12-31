@@ -44,4 +44,8 @@ public class ServiceAlcalde {
 	public List<Hogar> getHogaresByComuna(String nombre){
 		return repoHogar.findByComuna(nombre);
 	}
+	
+	public List<Hogar> getHogaresByProvincia(String nombre){
+		return repoHogar.findByProvincia(nombre);
+	}
 }

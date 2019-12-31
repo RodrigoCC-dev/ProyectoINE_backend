@@ -14,12 +14,16 @@ import org.springframework.stereotype.Component;
 
 import cl.usach.fingesoft.model.Comuna;
 import cl.usach.fingesoft.model.Hogar;
+import cl.usach.fingesoft.model.Provincia;
 
 @Component
 public class RepositoryHogar {
 
 	@Autowired
 	private RepositoryComuna repoComuna;
+	
+	@Autowired
+	private RepositoryProvincia repoProvincia;
 	
 	private static Logger LOG = LoggerFactory.getLogger(RepositoryHogar.class);
 	
@@ -56,6 +60,7 @@ public class RepositoryHogar {
 		}
 		return hogares;
 	}
+	
 	
 	public List<Hogar> findByComuna(String nombre){
 		Hogar nuevoHogar = new Hogar();
@@ -125,6 +130,27 @@ public class RepositoryHogar {
 	}
 	
 	
+	public List<Hogar> findByProvincia(String provincia){
+		Provincia nuevaProv = repoProvincia.findDatos(provincia);
+		nuevaProv = repoProvincia.findComunas(nuevaProv);
+		List<Hogar> hogares = new ArrayList<Hogar>();
+		String nombreComuna = "";
+		if(nuevaProv.getNumero() != 0) {
+			for(int i = 0; i < nuevaProv.getListaComunas().size(); i++) {
+				nombreComuna = nuevaProv.getListaComunas().get(i).getNombre();
+				hogares.addAll(this.findByComuna(nombreComuna));
+			}
+		}
+		else {
+			LOG.error("Error con findByProvincia. No se encuentra la provincia " + provincia);
+		}
+		return hogares;
+	}
+	
+	
+	
+	
+	
 	public void guardarPorComuna(String comuna) {
 		String nombreFuente = "Microdato_Censo2017-Hogares.csv";
 		String archivoDestino = "Hogares_" + comuna.toUpperCase() + ".csv";
@@ -148,6 +174,7 @@ public class RepositoryHogar {
 					}
 					pw.close();
 					contenido.close();
+					LOG.info("Generado archivo " + archivoDestino);
 				}
 				catch(Exception e) {
 					LOG.error("Error al guardarPorComuna. No es posible abrir archivo de destino " + archivoDestino);
