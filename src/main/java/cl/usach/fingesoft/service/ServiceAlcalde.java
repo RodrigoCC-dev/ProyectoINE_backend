@@ -41,7 +41,7 @@ public class ServiceAlcalde {
 	}
 	
 	//Test//
-	public List<Hogar> getHogares(){
-		return repoHogar.findAll();
+	public List<Hogar> getHogaresByComuna(String nombre){
+		return repoHogar.findByComuna(nombre);
 	}
 }

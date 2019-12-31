@@ -36,9 +36,10 @@ public class AlcaldeController {
 	}
 	
 	//Test//
-	@GetMapping("/test/hogares")
-	public List<Hogar> getHogares(){
-		return serviceAlcalde.getHogares();
+	@PostMapping("/test/hogares_comuna")
+	public List<Hogar> getHogaresByComuna(@RequestBody Map<String,String> body){
+		String nombre = body.get("Comuna");
+		return serviceAlcalde.getHogaresByComuna(nombre);
 	}
 }
 
