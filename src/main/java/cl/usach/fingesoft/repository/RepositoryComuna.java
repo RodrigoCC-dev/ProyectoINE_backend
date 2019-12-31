@@ -15,19 +15,17 @@ import cl.usach.fingesoft.model.Comuna;
 @Component
 public class RepositoryComuna {
 	
-	private static String rutaArchivos = "D:\\Datos Censo 2017\\Microdato_Censo2017-Personas\\Censo2017_Identificación_Geográfica\\";
-	
 	private static Logger LOG = LoggerFactory.getLogger(RepositoryComuna.class);
 	
 	public Comuna findDatos(String nombre) {
 		Comuna retorno = new Comuna();
-		String ruta = "D:\\Datos Censo 2017\\Microdato_Censo2017-Personas\\Censo2017_Identificación_Geográfica\\Microdato_Censo2017-Comunas.csv";
+		String nombreArchivo = "Microdato_Censo2017-Comunas.csv";
 		String comuna = nombre.toUpperCase();
 		String texto = "";
 		String[] info;
 		int num;
 		try {
-			FileReader lector = new FileReader(ruta);
+			FileReader lector = new FileReader(RepositoryArchivos.getRutaGeografica() + nombreArchivo);
 			BufferedReader contenido = new BufferedReader(lector);
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {
@@ -41,7 +39,7 @@ public class RepositoryComuna {
 			contenido.close();
 		}
 		catch (Exception e) {
-			LOG.error("Error al abrir el archivo de comunas.");
+			LOG.error("Error al abrir el archivo " + nombreArchivo);
 		}
 		return retorno;
 	}
@@ -52,7 +50,7 @@ public class RepositoryComuna {
 		String texto = "";
 		String[] info;
 		try {
-			FileReader archivo = new FileReader(rutaArchivos + nombreArchivo);
+			FileReader archivo = new FileReader(RepositoryArchivos.getRutaGeografica() + nombreArchivo);
 			BufferedReader contenido = new BufferedReader(archivo);
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {
@@ -71,14 +69,14 @@ public class RepositoryComuna {
 	}
 	
 	public Comuna findLocalidades(Comuna nombre) {
-		String ruta = "D:\\Datos Censo 2017\\Microdato_Censo2017-Personas\\Censo2017_Identificación_Geográfica\\Microdato_Censo2017-Distritos.csv";
+		String nombreArchivo = "Microdato_Censo2017-Distritos.csv";
 		String texto = "";
 		String[] info;
 		int codigo;
 		List<Integer> lista = new ArrayList<>();
 		List<String> localidades = new ArrayList<>();
 		try {
-			FileReader lector = new FileReader(ruta);
+			FileReader lector = new FileReader(RepositoryArchivos.getRutaGeografica() + nombreArchivo);
 			BufferedReader contenido = new BufferedReader(lector);
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {
@@ -94,16 +92,10 @@ public class RepositoryComuna {
 			contenido.close();
 		}
 		catch (Exception e) {
-			LOG.error("Error al abrir el archivo de distritos.");
+			LOG.error("Error al abrir el archivo " + nombreArchivo);
 		}
 		return nombre;
 	}
 
-	public static String getRutaArchivos() {
-		return rutaArchivos;
-	}
 
-	public static void setRutaArchivos(String rutaArchivos) {
-		RepositoryComuna.rutaArchivos = rutaArchivos;
-	}
 }

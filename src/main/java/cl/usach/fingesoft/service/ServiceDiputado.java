@@ -3,6 +3,7 @@ package cl.usach.fingesoft.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cl.usach.fingesoft.model.Distrito;
 import cl.usach.fingesoft.repository.RepositoryDistrito;
 import cl.usach.fingesoft.repository.RepositoryHogar;
 import cl.usach.fingesoft.repository.RepositoryPersona;
@@ -20,9 +21,14 @@ public class ServiceDiputado {
 	
 	@Autowired
 	private RepositoryHogar repoHogar;
-	
+	**/
 	@Autowired
 	private RepositoryDistrito repoDistrito;
-	**/
+	
+	
+	public Distrito getDistrito(int numero) {
+		return repoDistrito.findDistrito(numero);
+	}
+	
 	
 }

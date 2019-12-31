@@ -3,6 +3,7 @@ package cl.usach.fingesoft.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cl.usach.fingesoft.model.Circunscripcion;
 import cl.usach.fingesoft.repository.RepositoryCircunscripcion;
 import cl.usach.fingesoft.repository.RepositoryHogar;
 import cl.usach.fingesoft.repository.RepositoryPersona;
@@ -20,9 +21,13 @@ public class ServiceSenador {
 	
 	@Autowired
 	private RepositoryHogar repoHogar;
-	
-	@Autowired
-	private RepositoryCircunscripcion repoCircusncripcion;
 	**/
+	@Autowired
+	private RepositoryCircunscripcion repoCircunscripcion;
+	
+	
+	public Circunscripcion getCircunscripcion(int numero) {
+		return repoCircunscripcion.findCircunscripcion(numero);
+	}
 	
 }

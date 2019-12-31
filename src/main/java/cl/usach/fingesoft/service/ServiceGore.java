@@ -9,7 +9,7 @@ import cl.usach.fingesoft.repository.RepositoryHogar;
 import cl.usach.fingesoft.repository.RepositoryPersona;
 import cl.usach.fingesoft.repository.RepositoryProvincia;
 import cl.usach.fingesoft.repository.RepositoryRegion;
-import cl.usach.fingesoft.repository.RepositoryRegion2;
+import cl.usach.fingesoft.repository.RepositoryRegion;
 import cl.usach.fingesoft.repository.RepositoryVivienda;
 
 @Service
@@ -26,7 +26,7 @@ public class ServiceGore {
 	private RepositoryHogar repoHogar;
 	**/
 	@Autowired
-	private RepositoryRegion2 repoRegion;
+	private RepositoryRegion repoRegion;
 	
 	@Autowired
 	private RepositoryProvincia repoProvincia;
