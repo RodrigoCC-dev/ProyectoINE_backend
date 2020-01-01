@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Comuna;
 import cl.usach.fingesoft.model.Hogar;
 import cl.usach.fingesoft.repository.RepositoryComuna;
@@ -26,6 +27,9 @@ public class ServiceAlcalde {
 	
 	@Autowired
 	private RepositoryComuna repoComuna;
+	
+	@Autowired
+	private TipologiaHogar tipoHogar;
 	
 	
 	public Comuna getComunaByNombre(String nombre) {
@@ -53,5 +57,9 @@ public class ServiceAlcalde {
 	
 	public List<Hogar> getHogaresByLocalidad(String comuna, String localidad){
 		return repoHogar.findByLocalidad(comuna, localidad);
+	}
+	
+	public TipologiaHogar getTipologias() {
+		return tipoHogar.calcularTipologia(repoHogar.findAll());
 	}
 }
