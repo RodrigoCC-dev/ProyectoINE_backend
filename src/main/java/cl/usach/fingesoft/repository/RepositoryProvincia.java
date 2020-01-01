@@ -19,6 +19,9 @@ public class RepositoryProvincia {
 	@Autowired
 	private RepositoryComuna repoComuna;
 	
+	@Autowired
+	private RepositoryArchivos repoArchivos;
+	
 	private static Logger LOG = LoggerFactory.getLogger(RepositoryProvincia.class);
 	
 	
@@ -29,7 +32,7 @@ public class RepositoryProvincia {
 		String texto = "";
 		String[] info;
 		try {
-			FileReader archivo = new FileReader(RepositoryArchivos.getRutaGeografica() + nombreArchivo);
+			FileReader archivo = new FileReader(repoArchivos.getRutaGeografica() + nombreArchivo);
 			BufferedReader contenido = new BufferedReader(archivo);
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {
@@ -54,7 +57,7 @@ public class RepositoryProvincia {
 		String texto = "";
 		String[] info;
 		try {
-			FileReader archivo = new FileReader(RepositoryArchivos.getRutaGeografica() + nombreArchivo);
+			FileReader archivo = new FileReader(repoArchivos.getRutaGeografica() + nombreArchivo);
 			BufferedReader contenido = new BufferedReader(archivo);
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {
@@ -74,25 +77,25 @@ public class RepositoryProvincia {
 	
 	
 	public Provincia findComunas(Provincia nombre) {
-		String nombreArchivo = "Microdato_Censo2017-Urbano.csv"; 
+		String nombreArchivo = "Microdato_Censo2017-Geografia.csv"; 
 		String texto = "";
 		String[] info;
 		int codigo;
-		int idComunaAnterior = 0;
+		List<Integer> idComunas = new ArrayList<>();
 		List<Comuna> comunas = new ArrayList<>();
 		Comuna newComuna = new Comuna();
 		try {
-			FileReader archivo = new FileReader(RepositoryArchivos.getRutaGeografica() + nombreArchivo);
+			FileReader archivo = new FileReader(repoArchivos.getRutaGeografica() + nombreArchivo);
 			BufferedReader contenido = new BufferedReader(archivo);
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {
 				info = texto.split(";");
 				codigo = Integer.parseInt(info[1]); 
 				if(codigo == nombre.getNumero()) {
-					if(idComunaAnterior != Integer.parseInt(info[2])) {
+					if(!idComunas.contains(Integer.parseInt(info[2]))) {
 						newComuna = repoComuna.findComunaByCodigo(Integer.parseInt(info[2]));
 						newComuna = repoComuna.findLocalidades(newComuna);
-						idComunaAnterior = newComuna.getNumero();
+						idComunas.add(newComuna.getNumero());
 						comunas.add(newComuna);
 					}
 				}

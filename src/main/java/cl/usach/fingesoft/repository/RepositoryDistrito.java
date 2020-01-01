@@ -19,6 +19,9 @@ public class RepositoryDistrito {
 	@Autowired
 	private RepositoryComuna repoComuna;
 	
+	@Autowired
+	private RepositoryArchivos repoArchivos;
+	
 	private static Logger LOG = LoggerFactory.getLogger(RepositoryDistrito.class);
 	
 	
@@ -30,7 +33,7 @@ public class RepositoryDistrito {
 		List<Comuna> comunas = new ArrayList<Comuna>();
 		Comuna newComuna = new Comuna();
 		try {
-			FileReader archivo = new FileReader(RepositoryArchivos.getRutaParlamentarios() + nombreArchivo);
+			FileReader archivo = new FileReader(repoArchivos.getRutaParlamentarios() + nombreArchivo);
 			BufferedReader contenido = new BufferedReader(archivo);
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {

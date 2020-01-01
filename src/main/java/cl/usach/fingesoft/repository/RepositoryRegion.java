@@ -18,6 +18,9 @@ public class RepositoryRegion {
 	
 	@Autowired
 	private RepositoryProvincia repoProvincia;
+	
+	@Autowired
+	private RepositoryArchivos repoArchivos;
 
 	private static Logger LOG = LoggerFactory.getLogger(RepositoryRegion.class);
 	
@@ -29,7 +32,7 @@ public class RepositoryRegion {
 		String texto = "";
 		String[] info;
 		try {
-			FileReader archivo = new FileReader(RepositoryArchivos.getRutaGeografica() + nombreArchivo);
+			FileReader archivo = new FileReader(repoArchivos.getRutaGeografica() + nombreArchivo);
 			BufferedReader contenido = new BufferedReader(archivo);
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {
@@ -54,7 +57,7 @@ public class RepositoryRegion {
 		String texto = "";
 		String[] info;
 		try {
-			FileReader archivo = new FileReader(RepositoryArchivos.getRutaGeografica() + nombreArchivo);
+			FileReader archivo = new FileReader(repoArchivos.getRutaGeografica() + nombreArchivo);
 			BufferedReader contenido = new BufferedReader(archivo);
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {
@@ -74,23 +77,23 @@ public class RepositoryRegion {
 	
 	
 	public Region findProvincias(Region region) {
-		String nombreArchivo = "Microdato_Censo2017-Urbano.csv";
+		String nombreArchivo = "Microdato_Censo2017-Geografia.csv";
 		String texto = "";
 		String[] info;
-		List<Provincia> provincias = new ArrayList<Provincia>();
+		List<Provincia> provincias = new ArrayList<>();
 		Provincia newProvincia = new Provincia();
-		int idProvAnterior = 0;
+		List<Integer> idProvincias = new ArrayList<>();
 		try {
-			FileReader archivo = new FileReader(RepositoryArchivos.getRutaGeografica() + nombreArchivo);
+			FileReader archivo = new FileReader(repoArchivos.getRutaGeografica() + nombreArchivo);
 			BufferedReader contenido = new BufferedReader(archivo);
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {
 				info = texto.split(";");
 				if(region.getNumero() == Integer.parseInt(info[0])) {
-					if(idProvAnterior != Integer.parseInt(info[1])) {
+					if(!idProvincias.contains(Integer.parseInt(info[1]))) {
 						newProvincia = repoProvincia.findPronviciaByCodigo(Integer.parseInt(info[1]));
 						newProvincia = repoProvincia.findComunas(newProvincia);
-						idProvAnterior = newProvincia.getNumero();
+						idProvincias.add(newProvincia.getNumero());
 						provincias.add(newProvincia);
 					}
 					

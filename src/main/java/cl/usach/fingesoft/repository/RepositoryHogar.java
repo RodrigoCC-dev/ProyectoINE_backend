@@ -35,7 +35,7 @@ public class RepositoryHogar {
 	
 	public List<Hogar> findAll() {
 		Hogar nuevoHogar = new Hogar();
-		List<Hogar> hogares = new ArrayList<Hogar>();
+		List<Hogar> hogares = new ArrayList<>();
 		String nombreArchivo = "Microdato_Censo2017-Hogares.csv";
 		String texto = "";
 		String[] info;
@@ -69,7 +69,7 @@ public class RepositoryHogar {
 	
 	public List<Hogar> findByComuna(String nombre){
 		Hogar nuevoHogar = new Hogar();
-		List<Hogar> hogares = new ArrayList<Hogar>();
+		List<Hogar> hogares = new ArrayList<>();
 		String nombreArchivo = "Microdato_Censo2017-Hogares.csv";
 		String nombreFuente = "Hogares_";
 		String texto = "";
@@ -138,7 +138,7 @@ public class RepositoryHogar {
 	public List<Hogar> findByProvincia(String provincia){
 		Provincia nuevaProv = repoProvincia.findDatos(provincia);
 		nuevaProv = repoProvincia.findComunas(nuevaProv);
-		List<Hogar> hogares = new ArrayList<Hogar>();
+		List<Hogar> hogares = new ArrayList<>();
 		String nombreComuna = "";
 		if(nuevaProv.getNumero() != 0) {
 			for(int i = 0; i < nuevaProv.getListaComunas().size(); i++) {
@@ -157,7 +157,7 @@ public class RepositoryHogar {
 	public List<Hogar> findByRegion(String region){
 		Region nuevaRegion = repoRegion.findDatos(region);
 		nuevaRegion = repoRegion.findProvincias(nuevaRegion);
-		List<Hogar> hogares = new ArrayList<Hogar>();
+		List<Hogar> hogares = new ArrayList<>();
 		String nombreProvincia = "";
 		if(nuevaRegion.getNumero() != 0) {
 			for(int i = 0; i < nuevaRegion.getListaProvincias().size(); i++) {

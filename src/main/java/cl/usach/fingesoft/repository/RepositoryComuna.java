@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cl.usach.fingesoft.model.Comuna;
@@ -14,6 +15,9 @@ import cl.usach.fingesoft.model.Comuna;
 
 @Component
 public class RepositoryComuna {
+	
+	@Autowired
+	private RepositoryArchivos repoArchivos;
 	
 	private static Logger LOG = LoggerFactory.getLogger(RepositoryComuna.class);
 	
@@ -25,7 +29,7 @@ public class RepositoryComuna {
 		String[] info;
 		int num;
 		try {
-			FileReader lector = new FileReader(RepositoryArchivos.getRutaGeografica() + nombreArchivo);
+			FileReader lector = new FileReader(repoArchivos.getRutaGeografica() + nombreArchivo);
 			BufferedReader contenido = new BufferedReader(lector);
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {
@@ -50,7 +54,7 @@ public class RepositoryComuna {
 		String texto = "";
 		String[] info;
 		try {
-			FileReader archivo = new FileReader(RepositoryArchivos.getRutaGeografica() + nombreArchivo);
+			FileReader archivo = new FileReader(repoArchivos.getRutaGeografica() + nombreArchivo);
 			BufferedReader contenido = new BufferedReader(archivo);
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {
@@ -76,7 +80,7 @@ public class RepositoryComuna {
 		List<Integer> lista = new ArrayList<>();
 		List<String> localidades = new ArrayList<>();
 		try {
-			FileReader lector = new FileReader(RepositoryArchivos.getRutaGeografica() + nombreArchivo);
+			FileReader lector = new FileReader(repoArchivos.getRutaGeografica() + nombreArchivo);
 			BufferedReader contenido = new BufferedReader(lector);
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {
