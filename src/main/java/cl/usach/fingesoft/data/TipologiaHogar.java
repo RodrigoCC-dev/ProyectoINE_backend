@@ -1,5 +1,12 @@
 package cl.usach.fingesoft.data;
 
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import cl.usach.fingesoft.model.Hogar;
+
+@Component
 public class TipologiaHogar {
 
 	private double unipersonal;
@@ -55,5 +62,54 @@ public class TipologiaHogar {
 	}
 	
 	
+	public TipologiaHogar calcularTipologia(List<Hogar> listaHogares) {
+		double total = 0;
+		double unipersonal = 0;
+		double compuesto = 0;
+		double extenso = 0;
+		double sinNucleo = 0;
+		double monoParental = 0;
+		double parejasSinHijos = 0;
+		double parejasConHijos = 0;
+		TipologiaHogar tipologia = new TipologiaHogar();
+		for(int i = 0; i < listaHogares.size(); i++) {
+			if(listaHogares.get(i).getTipoHogar() == 1) {
+				unipersonal++;
+				total++;
+			}
+			else if(listaHogares.get(i).getTipoHogar() == 2) {
+				monoParental++;
+				total++;
+			}
+			else if(listaHogares.get(i).getTipoHogar() == 3) {
+				parejasSinHijos++;
+				total++;
+			}
+			else if(listaHogares.get(i).getTipoHogar() == 4) {
+				parejasConHijos++;
+				total++;
+			}
+			else if(listaHogares.get(i).getTipoHogar() == 5) {
+				compuesto++;
+				total++;
+			}
+			else if(listaHogares.get(i).getTipoHogar() == 6) {
+				extenso++;
+				total++;
+			}
+			else if(listaHogares.get(i).getTipoHogar() == 7) {
+				sinNucleo++;
+				total++;
+			}
+		}
+		tipologia.setUnipersonal((unipersonal / total) * 100);
+		tipologia.setCompuesto((compuesto / total) * 100);
+		tipologia.setExtenso((extenso / total) * 100);
+		tipologia.setSinNucleo((sinNucleo / total) * 100);
+		tipologia.setMonoParental((monoParental / total) * 100);
+		tipologia.setParejasSinHijos((parejasSinHijos / total) * 100);
+		tipologia.setParejasConHijos((parejasConHijos / total) * 100);
+		return tipologia;
+	}
 
 }
