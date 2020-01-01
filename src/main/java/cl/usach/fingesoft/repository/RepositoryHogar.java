@@ -68,7 +68,6 @@ public class RepositoryHogar {
 	
 	
 	public List<Hogar> findByComuna(String nombre){
-		Hogar nuevoHogar = new Hogar();
 		List<Hogar> hogares = new ArrayList<>();
 		String nombreArchivo = "Microdato_Censo2017-Hogares.csv";
 		String nombreFuente = "Hogares_";
@@ -83,6 +82,7 @@ public class RepositoryHogar {
 				texto = contenido.readLine();
 				while((texto = contenido.readLine()) != null) {
 					info = texto.split(";");
+					Hogar nuevoHogar = new Hogar();
 					nuevoHogar.setRegion(Integer.parseInt(info[0]));
 					nuevoHogar.setProvincia(Integer.parseInt(info[1]));
 					nuevoHogar.setComuna(Integer.parseInt(info[2]));
@@ -106,6 +106,7 @@ public class RepositoryHogar {
 					while((texto = contenido.readLine()) != null) {
 						info = texto.split(";");
 						if(Integer.parseInt(info[2]) == comuna.getNumero()) {
+							Hogar nuevoHogar = new Hogar();
 							nuevoHogar.setRegion(Integer.parseInt(info[0]));
 							nuevoHogar.setProvincia(Integer.parseInt(info[1]));
 							nuevoHogar.setComuna(Integer.parseInt(info[2]));
@@ -172,5 +173,26 @@ public class RepositoryHogar {
 	}
 	
 	
+	public List<Hogar> findByLocalidad(String comuna, String localidad){
+		Comuna nuevaComuna = repoComuna.findDatos(comuna);
+		nuevaComuna = repoComuna.findLocalidades(nuevaComuna);
+		int idLocalidad = 0;
+		int posicion = 0;
+		List<Hogar> hogares;
+		List<Hogar> locales = new ArrayList<>();
+		for(int i = 0; i < nuevaComuna.getLocalidades().size(); i ++) {
+			if(localidad.toUpperCase().equals(nuevaComuna.getLocalidades().get(i))) {
+				posicion = nuevaComuna.getLocalidades().indexOf(localidad.toUpperCase());
+				idLocalidad = nuevaComuna.getDc().get(posicion);
+			}
+		}
+		hogares = this.findByComuna(comuna);
+		for(int j = 0; j < hogares.size(); j++) {
+			if(hogares.get(j).getDc() == idLocalidad) {
+				locales.add(hogares.get(j));
+			}
+		}
+		return locales;
+	}
 	
 }

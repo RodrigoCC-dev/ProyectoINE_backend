@@ -46,5 +46,12 @@ public class AlcaldeController {
 		String nombre = body.get("Provincia");
 		return serviceAlcalde.getHogaresByProvincia(nombre);
 	}
+	
+	@PostMapping("/test/hogares_localidad")
+	public List<Hogar> getHogaresByLocalidad(@RequestBody Map<String,String> body){
+		String comuna = body.get("Comuna");
+		String localidad = body.get("Localidad");
+		return serviceAlcalde.getHogaresByLocalidad(comuna, localidad);
+	}
 }
 

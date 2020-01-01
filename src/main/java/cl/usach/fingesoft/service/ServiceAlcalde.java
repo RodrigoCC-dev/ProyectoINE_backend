@@ -41,11 +41,17 @@ public class ServiceAlcalde {
 	}
 	
 	//Test//
+	//Para prueba de métodos Repository. Eliminar posteriormente
+	
 	public List<Hogar> getHogaresByComuna(String nombre){
 		return repoHogar.findByComuna(nombre);
 	}
 	
 	public List<Hogar> getHogaresByProvincia(String nombre){
 		return repoHogar.findByProvincia(nombre);
+	}
+	
+	public List<Hogar> getHogaresByLocalidad(String comuna, String localidad){
+		return repoHogar.findByLocalidad(comuna, localidad);
 	}
 }
