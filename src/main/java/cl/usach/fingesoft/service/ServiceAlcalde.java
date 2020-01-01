@@ -44,6 +44,17 @@ public class ServiceAlcalde {
 		return nueva;
 	}
 	
+	public TipologiaHogar obtenerTipología(String comuna) {
+		List<Hogar> hogares = repoHogar.findByComuna(comuna);
+		return tipoHogar.calcularTipologia(hogares);
+	}
+	
+	public TipologiaHogar obtenerTipologiaXsector(String comuna, String localidad) {
+		List<Hogar> hogares = repoHogar.findByLocalidad(comuna, localidad);
+		return tipoHogar.calcularTipologia(hogares);
+	}
+	
+	
 	//Test//
 	//Para prueba de métodos Repository. Eliminar posteriormente
 	

@@ -10,7 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import cl.usach.fingesoft.model.Circunscripcion;
 import cl.usach.fingesoft.model.Comuna;
+import cl.usach.fingesoft.model.Distrito;
 import cl.usach.fingesoft.model.Hogar;
 import cl.usach.fingesoft.model.Provincia;
 import cl.usach.fingesoft.model.Region;
@@ -26,6 +28,12 @@ public class RepositoryHogar {
 	
 	@Autowired
 	private RepositoryRegion repoRegion;
+	
+	@Autowired
+	private RepositoryDistrito repoDistrito;
+	
+	@Autowired
+	private RepositoryCircunscripcion repoCircunscripcion;
 	
 	@Autowired
 	private RepositoryArchivos repoArchivos;
@@ -193,6 +201,30 @@ public class RepositoryHogar {
 			}
 		}
 		return locales;
+	}
+	
+	
+	public List<Hogar> findByDistrito(int distrito){
+		Distrito nuevoDistrito = repoDistrito.findDistrito(distrito);
+		List<Hogar> hogares = new ArrayList<>();
+		String nombreComuna = "";
+		for(int i = 0; i < nuevoDistrito.getListaComunas().size(); i++) {
+			nombreComuna = nuevoDistrito.getListaComunas().get(i).getNombre();
+			hogares.addAll(this.findByComuna(nombreComuna));
+		}
+		return hogares;
+	}
+	
+	
+	public List<Hogar> findByCircunscripcion(int Circunscripcion){
+		Circunscripcion nuevoCircns = repoCircunscripcion.findCircunscripcion(Circunscripcion);
+		List<Hogar> hogares = new ArrayList<>();
+		String nombreComuna = "";
+		for(int i = 0; i < nuevoCircns.getListaComunas().size(); i++) {
+			nombreComuna = nuevoCircns.getListaComunas().get(i).getNombre();
+			hogares.addAll(this.findByComuna(nombreComuna));
+		}
+		return hogares;
 	}
 	
 }

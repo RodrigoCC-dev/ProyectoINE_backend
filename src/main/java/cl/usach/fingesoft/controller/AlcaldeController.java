@@ -23,18 +23,32 @@ public class AlcaldeController {
 	@Autowired
 	ServiceAlcalde serviceAlcalde;
 	
-	// Test lectura de archivos //
-	@PostMapping("/test/datos_comuna")
+
+	@PostMapping("/datos_comuna")
 	public Comuna getDatos(@RequestBody Map<String,String> body) {
-		String nombre = body.get("comuna");
+		String nombre = body.get("Comuna");
 		return serviceAlcalde.getComunaByNombre(nombre);
 	}
 	
-	@PostMapping("/test/codigo_comuna")
+	@PostMapping("/codigo_comuna")
 	public Comuna getComunaByCodigo(@RequestBody Map<String,String> body) {
-		int codigo = Integer.parseInt(body.get("codigo"));
+		int codigo = Integer.parseInt(body.get("Codigo"));
 		return serviceAlcalde.getComunaByCodigo(codigo);
 	}
+	
+	@PostMapping("/tipologia_comuna")
+	public TipologiaHogar obtenerTipologia(@RequestBody Map<String,String> body) {
+		String nombre = body.get("Comuna");
+		return serviceAlcalde.obtenerTipología(nombre);
+	}
+	
+	@PostMapping("/tipologia_localidad")
+	public TipologiaHogar obtenerTipologiaXsector(@RequestBody Map<String,String> body) {
+		String comuna = body.get("Comuna");
+		String localidad = body.get("Localidad");
+		return serviceAlcalde.obtenerTipologiaXsector(comuna, localidad);
+	}
+	
 	
 	//Test//
 	@PostMapping("/test/hogares_comuna")
