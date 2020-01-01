@@ -2,8 +2,6 @@ package cl.usach.fingesoft.repository;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +13,7 @@ import org.springframework.stereotype.Component;
 import cl.usach.fingesoft.model.Comuna;
 import cl.usach.fingesoft.model.Hogar;
 import cl.usach.fingesoft.model.Provincia;
+import cl.usach.fingesoft.model.Region;
 
 @Component
 public class RepositoryHogar {
@@ -24,6 +23,12 @@ public class RepositoryHogar {
 	
 	@Autowired
 	private RepositoryProvincia repoProvincia;
+	
+	@Autowired
+	private RepositoryRegion repoRegion;
+	
+	@Autowired
+	private RepositoryArchivos repoArchivos;
 	
 	private static Logger LOG = LoggerFactory.getLogger(RepositoryHogar.class);
 	
@@ -35,7 +40,7 @@ public class RepositoryHogar {
 		String texto = "";
 		String[] info;
 		try {
-			FileReader archivo = new FileReader(RepositoryArchivos.getRutaHogares() + nombreArchivo);
+			FileReader archivo = new FileReader(repoArchivos.getRutaHogares() + nombreArchivo);
 			BufferedReader contenido = new BufferedReader(archivo);
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {
@@ -73,7 +78,7 @@ public class RepositoryHogar {
 		if(comuna.getNumero() != 0) {
 			nombreFuente = nombreFuente + comuna.getNombre() + ".csv";
 			try {
-				FileReader archivo = new FileReader(RepositoryArchivos.getRutaHogares() + nombreFuente);
+				FileReader archivo = new FileReader(repoArchivos.getRutaHogares() + nombreFuente);
 				BufferedReader contenido = new BufferedReader(archivo);
 				texto = contenido.readLine();
 				while((texto = contenido.readLine()) != null) {
@@ -95,7 +100,7 @@ public class RepositoryHogar {
 			}
 			catch(Exception e) {
 				try {
-					FileReader archivo = new FileReader(RepositoryArchivos.getRutaHogares() + nombreArchivo);
+					FileReader archivo = new FileReader(repoArchivos.getRutaHogares() + nombreArchivo);
 					BufferedReader contenido = new BufferedReader(archivo);
 					texto = contenido.readLine();
 					while((texto = contenido.readLine()) != null) {
@@ -116,7 +121,7 @@ public class RepositoryHogar {
 						}
 					}
 					contenido.close();
-					this.guardarPorComuna(nombre);
+					repoArchivos.guardarHogaresPorComuna(nombre, repoArchivos.getRutaHogares());
 				}
 				catch (Exception ex) {
 					LOG.error("Error con findByComuna. No es posible abrir archivo " + nombreArchivo);
@@ -149,44 +154,23 @@ public class RepositoryHogar {
 	
 	
 	
-	
-	
-	public void guardarPorComuna(String comuna) {
-		String nombreFuente = "Microdato_Censo2017-Hogares.csv";
-		String archivoDestino = "Hogares_" + comuna.toUpperCase() + ".csv";
-		String texto = "";
-		String[] info;
-		Comuna nueva = repoComuna.findDatos(comuna);		
-		if(nueva.getNumero() != 0) {
-			try {
-				FileReader archivo = new FileReader(RepositoryArchivos.getRutaHogares() + nombreFuente);
-				BufferedReader contenido = new BufferedReader(archivo);
-				try {
-					FileWriter destino = new FileWriter(RepositoryArchivos.getRutaHogares() + archivoDestino);
-					PrintWriter pw = new PrintWriter(destino);
-					texto = contenido.readLine();
-					pw.write(texto);
-					while((texto = contenido.readLine()) != null) {
-						info = texto.split(";");
-						if(nueva.getNumero() == Integer.parseInt(info[2])) {
-							pw.write("\n" + texto);
-						}
-					}
-					pw.close();
-					contenido.close();
-					LOG.info("Generado archivo " + archivoDestino);
-				}
-				catch(Exception e) {
-					LOG.error("Error al guardarPorComuna. No es posible abrir archivo de destino " + archivoDestino);
-				}
-			}
-			catch(Exception e) {
-				LOG.error("Error al guardarPorComuna. No es posible abrir archivo " + nombreFuente);
+	public List<Hogar> findByRegion(String region){
+		Region nuevaRegion = repoRegion.findDatos(region);
+		nuevaRegion = repoRegion.findProvincias(nuevaRegion);
+		List<Hogar> hogares = new ArrayList<Hogar>();
+		String nombreProvincia = "";
+		if(nuevaRegion.getNumero() != 0) {
+			for(int i = 0; i < nuevaRegion.getListaProvincias().size(); i++) {
+				nombreProvincia = nuevaRegion.getListaProvincias().get(i).getNombre();
+				hogares.addAll(this.findByProvincia(nombreProvincia));
 			}
 		}
 		else {
-			LOG.warn("No existe la comuna " + comuna);
+			LOG.error("Error con findByRegion. No se encuentra al región " + region);
 		}
+		return hogares;
 	}
+	
+	
 	
 }
