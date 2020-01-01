@@ -34,7 +34,6 @@ public class RepositoryHogar {
 	
 	
 	public List<Hogar> findAll() {
-		Hogar nuevoHogar = new Hogar();
 		List<Hogar> hogares = new ArrayList<>();
 		String nombreArchivo = "Microdato_Censo2017-Hogares.csv";
 		String texto = "";
@@ -45,6 +44,7 @@ public class RepositoryHogar {
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {
 				info = texto.split(";");
+				Hogar nuevoHogar = new Hogar();
 				nuevoHogar.setRegion(Integer.parseInt(info[0]));
 				nuevoHogar.setProvincia(Integer.parseInt(info[1]));
 				nuevoHogar.setComuna(Integer.parseInt(info[2]));
