@@ -52,27 +52,7 @@ public class RepositoryVivienda {
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {
 				info = texto.split(";");
-				Vivienda nuevaVivienda = new Vivienda();
-				nuevaVivienda.setRegion(Integer.parseInt(info[0]));
-				nuevaVivienda.setProvincia(Integer.parseInt(info[1]));
-				nuevaVivienda.setComuna(Integer.parseInt(info[2]));
-				nuevaVivienda.setDc(Integer.parseInt(info[3]));
-				nuevaVivienda.setArea(Integer.parseInt(info[4]));
-				nuevaVivienda.setZcLoc(Integer.parseInt(info[5]));
-				nuevaVivienda.setIdZonaLoc(Integer.parseInt(info[6]));
-				nuevaVivienda.setnViv(Integer.parseInt(info[7]));
-				nuevaVivienda.setP01(Integer.parseInt(info[8]));
-				nuevaVivienda.setP02(Integer.parseInt(info[9]));
-				nuevaVivienda.setP03a(Integer.parseInt(info[10]));
-				nuevaVivienda.setP03b(Integer.parseInt(info[11]));
-				nuevaVivienda.setP03c(Integer.parseInt(info[12]));
-				nuevaVivienda.setP04(Integer.parseInt(info[13]));
-				nuevaVivienda.setP05(Integer.parseInt(info[14]));
-				nuevaVivienda.setCantHog(Integer.parseInt(info[15]));
-				nuevaVivienda.setCantPer(Integer.parseInt(info[16]));
-				nuevaVivienda.setRegion15R(Integer.parseInt(info[17]));
-				nuevaVivienda.setProvincia15R(Integer.parseInt(info[18]));
-				nuevaVivienda.setComuna15R(Integer.parseInt(info[19]));
+				Vivienda nuevaVivienda = new Vivienda(info);
 				viviendas.add(nuevaVivienda);
 			}
 			contenido.close();
@@ -99,27 +79,7 @@ public class RepositoryVivienda {
 				texto = contenido.readLine();
 				while((texto = contenido.readLine()) != null) {
 					info = texto.split(";");
-					Vivienda nuevaVivienda = new Vivienda();
-					nuevaVivienda.setRegion(Integer.parseInt(info[0]));
-					nuevaVivienda.setProvincia(Integer.parseInt(info[1]));
-					nuevaVivienda.setComuna(Integer.parseInt(info[2]));
-					nuevaVivienda.setDc(Integer.parseInt(info[3]));
-					nuevaVivienda.setArea(Integer.parseInt(info[4]));
-					nuevaVivienda.setZcLoc(Integer.parseInt(info[5]));
-					nuevaVivienda.setIdZonaLoc(Integer.parseInt(info[6]));
-					nuevaVivienda.setnViv(Integer.parseInt(info[7]));
-					nuevaVivienda.setP01(Integer.parseInt(info[8]));
-					nuevaVivienda.setP02(Integer.parseInt(info[9]));
-					nuevaVivienda.setP03a(Integer.parseInt(info[10]));
-					nuevaVivienda.setP03b(Integer.parseInt(info[11]));
-					nuevaVivienda.setP03c(Integer.parseInt(info[12]));
-					nuevaVivienda.setP04(Integer.parseInt(info[13]));
-					nuevaVivienda.setP05(Integer.parseInt(info[14]));
-					nuevaVivienda.setCantHog(Integer.parseInt(info[15]));
-					nuevaVivienda.setCantPer(Integer.parseInt(info[16]));
-					nuevaVivienda.setRegion15R(Integer.parseInt(info[17]));
-					nuevaVivienda.setProvincia15R(Integer.parseInt(info[18]));
-					nuevaVivienda.setComuna15R(Integer.parseInt(info[19]));
+					Vivienda nuevaVivienda = new Vivienda(info);
 					viviendas.add(nuevaVivienda);
 				}
 				contenido.close();
@@ -132,27 +92,7 @@ public class RepositoryVivienda {
 					while((texto = contenido.readLine()) != null) {
 						info = texto.split(";");
 						if(Integer.parseInt(info[2]) == comuna.getNumero()) {
-							Vivienda nuevaVivienda = new Vivienda();
-							nuevaVivienda.setRegion(Integer.parseInt(info[0]));
-							nuevaVivienda.setProvincia(Integer.parseInt(info[1]));
-							nuevaVivienda.setComuna(Integer.parseInt(info[2]));
-							nuevaVivienda.setDc(Integer.parseInt(info[3]));
-							nuevaVivienda.setArea(Integer.parseInt(info[4]));
-							nuevaVivienda.setZcLoc(Integer.parseInt(info[5]));
-							nuevaVivienda.setIdZonaLoc(Integer.parseInt(info[6]));
-							nuevaVivienda.setnViv(Integer.parseInt(info[7]));
-							nuevaVivienda.setP01(Integer.parseInt(info[8]));
-							nuevaVivienda.setP02(Integer.parseInt(info[9]));
-							nuevaVivienda.setP03a(Integer.parseInt(info[10]));
-							nuevaVivienda.setP03b(Integer.parseInt(info[11]));
-							nuevaVivienda.setP03c(Integer.parseInt(info[12]));
-							nuevaVivienda.setP04(Integer.parseInt(info[13]));
-							nuevaVivienda.setP05(Integer.parseInt(info[14]));
-							nuevaVivienda.setCantHog(Integer.parseInt(info[15]));
-							nuevaVivienda.setCantPer(Integer.parseInt(info[16]));
-							nuevaVivienda.setRegion15R(Integer.parseInt(info[17]));
-							nuevaVivienda.setProvincia15R(Integer.parseInt(info[18]));
-							nuevaVivienda.setComuna15R(Integer.parseInt(info[19]));
+							Vivienda nuevaVivienda = new Vivienda(info);
 							viviendas.add(nuevaVivienda);
 						}
 					}

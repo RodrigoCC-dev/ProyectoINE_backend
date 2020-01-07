@@ -87,4 +87,8 @@ public class ServiceAlcalde {
 	public List<Vivienda> getViviendasByLocalidad(String comuna, String localidad){
 		return repoVivienda.findByLocalidad(comuna, localidad);
 	}
+	
+	public List<Vivienda> getViviendaByRegion(String region){
+		return repoVivienda.findByRegion(region);
+	}
 }

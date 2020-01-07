@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Comuna;
 import cl.usach.fingesoft.model.Hogar;
+import cl.usach.fingesoft.model.Vivienda;
 import cl.usach.fingesoft.service.ServiceAlcalde;
 
 @RestController
@@ -75,5 +76,30 @@ public class AlcaldeController {
 		return serviceAlcalde.getTipologias();
 	}
 	
+	
+	@PostMapping("/test/viviendas_comuna")
+	public List<Vivienda> getViviendasByComuna(@RequestBody Map<String,String> body){
+		String nombre = body.get("Comuna");
+		return serviceAlcalde.getViviendasByComuna(nombre);
+	}
+	
+	@PostMapping("/test/viviendas_provincia")
+	public List<Vivienda> getViviendasByProvincia(@RequestBody Map<String,String> body){
+		String nombre = body.get("Provincia");
+		return serviceAlcalde.getViviendasByProvincia(nombre);
+	}
+	
+	@PostMapping("/test/viviendas_localidad")
+	public List<Vivienda> getViviendasByLocalidad(@RequestBody Map<String,String> body){
+		String comuna = body.get("Comuna");
+		String localidad = body.get("Localidad");
+		return serviceAlcalde.getViviendasByLocalidad(comuna, localidad);
+	}
+	
+	@PostMapping("/test/viviendas_region")
+	public List<Vivienda> getViviendasByRegion(@RequestBody Map<String,String> body){
+		String region = body.get("Region");
+		return serviceAlcalde.getViviendaByRegion(region);
+	}
 }
 
