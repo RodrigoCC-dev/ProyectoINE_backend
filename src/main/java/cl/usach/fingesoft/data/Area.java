@@ -2,8 +2,12 @@ package cl.usach.fingesoft.data;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
+import cl.usach.fingesoft.model.Hogar;
 import cl.usach.fingesoft.model.Vivienda;
 
+@Component
 public class Area {
 
 	private double rural;
@@ -24,17 +28,17 @@ public class Area {
 	}
 	
 	
-	public Area calcularArea(List<Vivienda> listaViviendas) {
+	public Area calcularArea(List<Hogar> listaHogares) {
 		double total = 0;
 		double urbano = 0;
 		double rural = 0;
 		Area distribucion = new Area();
-		for(int i = 0; i < listaViviendas.size(); i++) {
-			if(listaViviendas.get(i).getArea() == 1) {
+		for(int i = 0; i < listaHogares.size(); i++) {
+			if(listaHogares.get(i).getArea() == 1) {
 				urbano++;
 				total++;
 			}
-			else if(listaViviendas.get(i).getArea() == 2) {
+			else if(listaHogares.get(i).getArea() == 2) {
 				rural++;
 				total++;
 			}

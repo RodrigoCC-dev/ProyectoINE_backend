@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import cl.usach.fingesoft.data.Area;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Comuna;
 import cl.usach.fingesoft.model.Hogar;
@@ -100,6 +101,11 @@ public class AlcaldeController {
 	public List<Vivienda> getViviendasByRegion(@RequestBody Map<String,String> body){
 		String region = body.get("Region");
 		return serviceAlcalde.getViviendaByRegion(region);
+	}
+	
+	@GetMapping("/test/areas")
+	public Area getAreas() {
+		return serviceAlcalde.getAreas();
 	}
 }
 
