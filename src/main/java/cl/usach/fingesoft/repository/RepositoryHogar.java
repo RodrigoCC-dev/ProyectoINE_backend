@@ -52,18 +52,7 @@ public class RepositoryHogar {
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {
 				info = texto.split(";");
-				Hogar nuevoHogar = new Hogar();
-				nuevoHogar.setRegion(Integer.parseInt(info[0]));
-				nuevoHogar.setProvincia(Integer.parseInt(info[1]));
-				nuevoHogar.setComuna(Integer.parseInt(info[2]));
-				nuevoHogar.setDc(Integer.parseInt(info[3]));
-				nuevoHogar.setArea(Integer.parseInt(info[4]));
-				nuevoHogar.setZcLoc(Integer.parseInt(info[5]));
-				nuevoHogar.setIdZonaLoc(Integer.parseInt(info[6]));
-				nuevoHogar.setnViv(Integer.parseInt(info[7]));
-				nuevoHogar.setnHogar(Integer.parseInt(info[8]));
-				nuevoHogar.setTipoHogar(Integer.parseInt(info[9]));
-				nuevoHogar.setTipoOperativo(Integer.parseInt(info[10]));
+				Hogar nuevoHogar = new Hogar(info);
 				hogares.add(nuevoHogar);
 			}
 			contenido.close();
@@ -90,18 +79,7 @@ public class RepositoryHogar {
 				texto = contenido.readLine();
 				while((texto = contenido.readLine()) != null) {
 					info = texto.split(";");
-					Hogar nuevoHogar = new Hogar();
-					nuevoHogar.setRegion(Integer.parseInt(info[0]));
-					nuevoHogar.setProvincia(Integer.parseInt(info[1]));
-					nuevoHogar.setComuna(Integer.parseInt(info[2]));
-					nuevoHogar.setDc(Integer.parseInt(info[3]));
-					nuevoHogar.setArea(Integer.parseInt(info[4]));
-					nuevoHogar.setZcLoc(Integer.parseInt(info[5]));
-					nuevoHogar.setIdZonaLoc(Integer.parseInt(info[6]));
-					nuevoHogar.setnViv(Integer.parseInt(info[7]));
-					nuevoHogar.setnHogar(Integer.parseInt(info[8]));
-					nuevoHogar.setTipoHogar(Integer.parseInt(info[9]));
-					nuevoHogar.setTipoOperativo(Integer.parseInt(info[10]));
+					Hogar nuevoHogar = new Hogar(info);
 					hogares.add(nuevoHogar);
 				}
 				contenido.close();
@@ -114,18 +92,7 @@ public class RepositoryHogar {
 					while((texto = contenido.readLine()) != null) {
 						info = texto.split(";");
 						if(Integer.parseInt(info[2]) == comuna.getNumero()) {
-							Hogar nuevoHogar = new Hogar();
-							nuevoHogar.setRegion(Integer.parseInt(info[0]));
-							nuevoHogar.setProvincia(Integer.parseInt(info[1]));
-							nuevoHogar.setComuna(Integer.parseInt(info[2]));
-							nuevoHogar.setDc(Integer.parseInt(info[3]));
-							nuevoHogar.setArea(Integer.parseInt(info[4]));
-							nuevoHogar.setZcLoc(Integer.parseInt(info[5]));
-							nuevoHogar.setIdZonaLoc(Integer.parseInt(info[6]));
-							nuevoHogar.setnViv(Integer.parseInt(info[7]));
-							nuevoHogar.setnHogar(Integer.parseInt(info[8]));
-							nuevoHogar.setTipoHogar(Integer.parseInt(info[9]));
-							nuevoHogar.setTipoOperativo(Integer.parseInt(info[10]));
+							Hogar nuevoHogar = new Hogar(info);
 							hogares.add(nuevoHogar);
 						}
 					}
