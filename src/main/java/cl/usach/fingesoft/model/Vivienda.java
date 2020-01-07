@@ -19,6 +19,9 @@ public class Vivienda {
 	private int p05;
 	private int cantHog;
 	private int cantPer;
+	private int region15R;
+	private int provincia15R;
+	private int comuna15R;
 	
 	
 	public int getRegion() {
@@ -122,6 +125,24 @@ public class Vivienda {
 	}
 	public void setCantPer(int cantPer) {
 		this.cantPer = cantPer;
+	}
+	public int getRegion15R() {
+		return region15R;
+	}
+	public void setRegion15R(int region15r) {
+		region15R = region15r;
+	}
+	public int getProvincia15R() {
+		return provincia15R;
+	}
+	public void setProvincia15R(int provincia15r) {
+		provincia15R = provincia15r;
+	}
+	public int getComuna15R() {
+		return comuna15R;
+	}
+	public void setComuna15R(int comuna15r) {
+		comuna15R = comuna15r;
 	}
 	
 	
