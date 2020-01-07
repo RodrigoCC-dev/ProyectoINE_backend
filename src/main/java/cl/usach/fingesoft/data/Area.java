@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import cl.usach.fingesoft.model.Hogar;
-import cl.usach.fingesoft.model.Vivienda;
+import cl.usach.fingesoft.model.Persona;
 
 @Component
 public class Area {
@@ -28,17 +28,17 @@ public class Area {
 	}
 	
 	
-	public Area calcularArea(List<Hogar> listaHogares) {
+	public Area calcularArea(List<Persona> listaPersonas) {
 		double total = 0;
 		double urbano = 0;
 		double rural = 0;
 		Area distribucion = new Area();
-		for(int i = 0; i < listaHogares.size(); i++) {
-			if(listaHogares.get(i).getArea() == 1) {
+		for(int i = 0; i < listaPersonas.size(); i++) {
+			if(listaPersonas.get(i).getArea() == 1) {
 				urbano++;
 				total++;
 			}
-			else if(listaHogares.get(i).getArea() == 2) {
+			else if(listaPersonas.get(i).getArea() == 2) {
 				rural++;
 				total++;
 			}

@@ -18,9 +18,9 @@ import cl.usach.fingesoft.repository.RepositoryVivienda;
 @Service
 public class ServiceAlcalde {
 
-	/**@Autowired
+	@Autowired
 	private RepositoryPersona repoPersona;
-	**/
+	
 	@Autowired
 	private RepositoryVivienda repoVivienda;
 	
@@ -97,6 +97,6 @@ public class ServiceAlcalde {
 	}
 		
 	public Area getAreas() {
-		return area.calcularArea(repoHogar.findAll());
+		return area.calcularArea(repoPersona.findAll());
 	}
 }
