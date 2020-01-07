@@ -19,6 +19,8 @@ public class RepositoryArchivos {
 	private String rutaGeografica = "Microdato_Censo2017-Personas\\Censo2017_Identificación_Geográfica\\";
 	private String rutaParlamentarios = "src/main/resources/static/";
 	private String rutaHogares = "Microdato_Censo2017-Hogares\\";
+	private String rutaViviendas = "Microdato_Censo2017-Viviendas\\";
+	private String rutaPersonas = "Microdato_Censo2017-Personas\\";
 	
 	@Autowired
 	private RepositoryComuna repoComuna;
@@ -43,6 +45,18 @@ public class RepositoryArchivos {
 	}
 	public void setRutaHogares(String rutaHogares) {
 		this.rutaHogares = rutaHogares;
+	}
+	public String getRutaViviendas() {
+		return rutaViviendas;
+	}
+	public void setRutaViviendas(String rutaViviendas) {
+		this.rutaViviendas = rutaViviendas;
+	}
+	public String getRutaPersonas() {
+		return rutaPersonas;
+	}
+	public void setRutaPersonas(String rutaPersonas) {
+		this.rutaPersonas = rutaPersonas;
 	}
 	public String getRutaPrincipal() {
 		return rutaPrincipal;

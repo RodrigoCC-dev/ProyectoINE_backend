@@ -47,7 +47,7 @@ public class RepositoryHogar {
 		String texto = "";
 		String[] info;
 		try {
-			FileReader archivo = new FileReader(repoArchivos.getRutaHogares() + nombreArchivo);
+			FileReader archivo = new FileReader(repoArchivos.getRutaPrincipal() + repoArchivos.getRutaHogares() + nombreArchivo);
 			BufferedReader contenido = new BufferedReader(archivo);
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {
@@ -85,7 +85,7 @@ public class RepositoryHogar {
 		if(comuna.getNumero() != 0) {
 			nombreFuente = nombreFuente + comuna.getNombre() + ".csv";
 			try {
-				FileReader archivo = new FileReader(repoArchivos.getRutaHogares() + nombreFuente);
+				FileReader archivo = new FileReader(repoArchivos.getRutaPrincipal() + repoArchivos.getRutaHogares() + nombreFuente);
 				BufferedReader contenido = new BufferedReader(archivo);
 				texto = contenido.readLine();
 				while((texto = contenido.readLine()) != null) {
@@ -108,7 +108,7 @@ public class RepositoryHogar {
 			}
 			catch(Exception e) {
 				try {
-					FileReader archivo = new FileReader(repoArchivos.getRutaHogares() + nombreArchivo);
+					FileReader archivo = new FileReader(repoArchivos.getRutaPrincipal() + repoArchivos.getRutaHogares() + nombreArchivo);
 					BufferedReader contenido = new BufferedReader(archivo);
 					texto = contenido.readLine();
 					while((texto = contenido.readLine()) != null) {
@@ -130,7 +130,7 @@ public class RepositoryHogar {
 						}
 					}
 					contenido.close();
-					repoArchivos.guardarHogaresPorComuna(nombre, repoArchivos.getRutaHogares());
+					repoArchivos.guardarHogaresPorComuna(nombre, repoArchivos.getRutaPrincipal() + repoArchivos.getRutaHogares());
 				}
 				catch (Exception ex) {
 					LOG.error("Error con findByComuna. No es posible abrir archivo " + nombreArchivo);
