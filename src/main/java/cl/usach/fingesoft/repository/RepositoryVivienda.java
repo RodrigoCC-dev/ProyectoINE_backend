@@ -10,7 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import cl.usach.fingesoft.model.Circunscripcion;
 import cl.usach.fingesoft.model.Comuna;
+import cl.usach.fingesoft.model.Distrito;
 import cl.usach.fingesoft.model.Provincia;
 import cl.usach.fingesoft.model.Region;
 import cl.usach.fingesoft.model.Vivienda;
@@ -228,6 +230,26 @@ public class RepositoryVivienda {
 	}
 	
 	
+	public List<Vivienda> findByDistrito(int distrito){
+		Distrito nuevoDistrito = repoDistrito.findDistrito(distrito);
+		List<Vivienda> viviendas = new ArrayList<>();
+		String nombreComuna = "";
+		for(int i = 0; i < nuevoDistrito.getListaComunas().size(); i++) {
+			nombreComuna = nuevoDistrito.getListaComunas().get(i).getNombre();
+			viviendas.addAll(this.findByComuna(nombreComuna));
+		}
+		return viviendas;
+	}
 	
 	
+	public List<Vivienda> findByCircunscripcion(int circunscripcion){
+		Circunscripcion nuevoCircuns = repoCircunscripcion.findCircunscripcion(circunscripcion);
+		List<Vivienda> viviendas = new ArrayList<>();
+		String nombreComuna = "";
+		for(int i = 0; i < nuevoCircuns.getListaComunas().size(); i++) {
+			nombreComuna = nuevoCircuns.getListaComunas().get(i).getNombre();
+			viviendas.addAll(this.findByComuna(nombreComuna));
+		}
+		return viviendas;
+	}
 }

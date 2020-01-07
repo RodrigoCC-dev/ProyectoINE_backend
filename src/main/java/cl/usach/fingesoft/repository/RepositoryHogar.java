@@ -216,8 +216,8 @@ public class RepositoryHogar {
 	}
 	
 	
-	public List<Hogar> findByCircunscripcion(int Circunscripcion){
-		Circunscripcion nuevoCircns = repoCircunscripcion.findCircunscripcion(Circunscripcion);
+	public List<Hogar> findByCircunscripcion(int circunscripcion){
+		Circunscripcion nuevoCircns = repoCircunscripcion.findCircunscripcion(circunscripcion);
 		List<Hogar> hogares = new ArrayList<>();
 		String nombreComuna = "";
 		for(int i = 0; i < nuevoCircns.getListaComunas().size(); i++) {

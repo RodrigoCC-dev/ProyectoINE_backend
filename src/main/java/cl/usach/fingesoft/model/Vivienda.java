@@ -24,6 +24,33 @@ public class Vivienda {
 	private int comuna15R;
 	
 	
+	public Vivienda() {
+	}
+	
+	public Vivienda(String[] datos) {
+		this.region = Integer.parseInt(datos[0]);
+		this.provincia = Integer.parseInt(datos[1]);
+		this.comuna = Integer.parseInt(datos[2]);
+		this.dc = Integer.parseInt(datos[3]);
+		this.area = Integer.parseInt(datos[4]);
+		this.zcLoc = Integer.parseInt(datos[5]);
+		this.idZonaLoc = Integer.parseInt(datos[6]);
+		this.nViv = Integer.parseInt(datos[7]);
+		this.p01 = Integer.parseInt(datos[8]);
+		this.p02 = Integer.parseInt(datos[9]);
+		this.p03a = Integer.parseInt(datos[10]);
+		this.p03b = Integer.parseInt(datos[11]);
+		this.p03c = Integer.parseInt(datos[12]);
+		this.p04 = Integer.parseInt(datos[13]);
+		this.p05 = Integer.parseInt(datos[14]);
+		this.cantHog = Integer.parseInt(datos[15]);
+		this.cantPer = Integer.parseInt(datos[16]);
+		this.region15R = Integer.parseInt(datos[17]);
+		this.provincia15R = Integer.parseInt(datos[18]);
+		this.comuna15R = Integer.parseInt(datos[19]);
+	}
+	
+	
 	public int getRegion() {
 		return region;
 	}
