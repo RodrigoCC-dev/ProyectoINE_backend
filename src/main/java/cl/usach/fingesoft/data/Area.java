@@ -14,7 +14,6 @@ import cl.usach.fingesoft.model.Persona;
 import cl.usach.fingesoft.model.Provincia;
 import cl.usach.fingesoft.model.Region;
 import cl.usach.fingesoft.repository.RepositoryCircunscripcion;
-import cl.usach.fingesoft.repository.RepositoryComuna;
 import cl.usach.fingesoft.repository.RepositoryDistrito;
 import cl.usach.fingesoft.repository.RepositoryPersona;
 import cl.usach.fingesoft.repository.RepositoryProvincia;
@@ -25,9 +24,6 @@ public class Area {
 
 	private double rural;
 	private double urbana;
-	
-	@Autowired
-	private RepositoryComuna repoComuna;
 	
 	@Autowired
 	private RepositoryProvincia repoProvincia;
@@ -143,52 +139,8 @@ public class Area {
 		return distribucion;
 	}
 	
-	public Area calcularAreaPorProvincia(String provincia) {
-		Provincia nuevaProv = repoProvincia.findDatos(provincia);
-		nuevaProv = repoProvincia.findComunas(nuevaProv);
-		return this.calcularAreaParam(nuevaProv.getListaComunas());
-	}
 	
-	
-	public Area calcularAreaPorRegion(String region) {
-		Region nuevaReg = repoRegion.findDatos(region);
-		nuevaReg = repoRegion.findProvincias(nuevaReg);
-		List<Double> totales = new ArrayList<>();
-		List<Double> parciales;
-		Area distribucion = new Area();
-		double total = 0;
-		double urbano = 0;
-		double rural = 0;
-		totales.add(urbano);
-		totales.add(rural);
-		totales.add(total);
-		for(int i = 0; i < nuevaReg.getListaProvincias().size(); i++) {
-			for(int j = 0; j < nuevaReg.getListaProvincias().get(i).getListaComunas().size(); j++) {
-				parciales = this.registrosPorComuna(nuevaReg.getListaProvincias().get(i).getListaComunas().get(j).getNombre());
-				totales.set(0, totales.get(0) + parciales.get(0));
-				totales.set(1, totales.get(1) + parciales.get(1));
-				totales.set(2, totales.get(2) + parciales.get(2));
-			}
-		}
-		distribucion.setUrbana((totales.get(0) / totales.get(2)) * 100);
-		distribucion.setRural((totales.get(1) / totales.get(2)) * 100);
-		return distribucion;
-	}
-	
-	
-	public Area calcularAreaPorDistrito(int numDistrito) {
-		Distrito nuevoDist = repoDistrito.findDistrito(numDistrito);
-		return this.calcularAreaParam(nuevoDist.getListaComunas());
-	}
-	
-	
-	public Area calcularAreaPorCircunscripcion(int numCircunscripcion) {
-		Circunscripcion nuevaCircuns = repoCircunscripcion.findCircunscripcion(numCircunscripcion);
-		return this.calcularAreaParam(nuevaCircuns.getListaComunas());
-	}
-	
-	
-	public Area calcularAreaParam(List<Comuna> comunas) {
+	public Area calcularAreaPorComunas(List<Comuna> comunas) {
 		List<Double> totales = new ArrayList<>();
 		List<Double> parciales;
 		Area distribucion = new Area();
@@ -203,6 +155,29 @@ public class Area {
 			totales.set(0, totales.get(0) + parciales.get(0));
 			totales.set(1, totales.get(1) + parciales.get(1));
 			totales.set(2, totales.get(2) + parciales.get(2));
+		}
+		distribucion.setUrbana((totales.get(0) / totales.get(2)) * 100);
+		distribucion.setRural((totales.get(1) / totales.get(2)) * 100);
+		return distribucion;
+	}
+	
+	public Area calcularAreaPorProvincias(List<Provincia> provincias) {
+		List<Double> totales = new ArrayList<>();
+		List<Double> parciales;
+		Area distribucion = new Area();
+		double total = 0;
+		double urbano = 0;
+		double rural = 0;
+		totales.add(urbano);
+		totales.add(rural);
+		totales.add(total);
+		for(int i = 0; i < provincias.size(); i++) {
+			for(int j = 0; j < provincias.get(i).getListaComunas().size(); j++) {
+				parciales = this.registrosPorComuna(provincias.get(i).getListaComunas().get(j).getNombre());
+				totales.set(0, totales.get(0) + parciales.get(0));
+				totales.set(1, totales.get(1) + parciales.get(1));
+				totales.set(2, totales.get(2) + parciales.get(2));
+			}
 		}
 		distribucion.setUrbana((totales.get(0) / totales.get(2)) * 100);
 		distribucion.setRural((totales.get(1) / totales.get(2)) * 100);

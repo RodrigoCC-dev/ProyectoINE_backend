@@ -46,6 +46,7 @@ public class ServiceSenador {
 	}
 	
 	public Area obtenerAreas(int numero) {
-		return area.calcularAreaPorCircunscripcion(numero);
+		Circunscripcion nuevaCircuns = repoCircunscripcion.findCircunscripcion(numero);
+		return area.calcularAreaPorComunas(nuevaCircuns.getListaComunas());
 	}
 }

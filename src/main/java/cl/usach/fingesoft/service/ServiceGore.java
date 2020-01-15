@@ -69,10 +69,14 @@ public class ServiceGore {
 	}
 	
 	public Area obtenerAreas(String region) {
-		return area.calcularAreaPorRegion(region);
+		Region nuevaReg = repoRegion.findDatos(region);
+		nuevaReg = repoRegion.findProvincias(nuevaReg);
+		return area.calcularAreaPorProvincias(nuevaReg.getListaProvincias());
 	}
 	
 	public Area obtenerAreasXprovincia(String provincia) {
-		return area.calcularAreaPorProvincia(provincia);
+		Provincia nuevaProv = repoProvincia.findDatos(provincia);
+		nuevaProv = repoProvincia.findComunas(nuevaProv);
+		return area.calcularAreaPorComunas(nuevaProv.getListaComunas());
 	}
 }

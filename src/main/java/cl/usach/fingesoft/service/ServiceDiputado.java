@@ -46,6 +46,7 @@ public class ServiceDiputado {
 	}
 	
 	public Area obtenerAreas(int distrito) {
-		return area.calcularAreaPorDistrito(distrito);
+		Distrito nuevoDist = repoDistrito.findDistrito(distrito);
+		return area.calcularAreaPorComunas(nuevoDist.getListaComunas());
 	}
 }
