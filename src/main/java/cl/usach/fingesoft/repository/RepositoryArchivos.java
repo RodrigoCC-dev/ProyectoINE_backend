@@ -15,7 +15,7 @@ import cl.usach.fingesoft.model.Comuna;
 @Component
 public class RepositoryArchivos {
 
-	private String rutaPrincipal = "D:\\Datos Censo 2017\\";
+	private String rutaPrincipal = "~\\Datos Censo 2017\\";
 	private String rutaGeografica = "Microdato_Censo2017-Personas\\Censo2017_Identificación_Geográfica\\";
 	private String rutaParlamentarios = "src/main/resources/static/";
 	private String rutaHogares = "Microdato_Censo2017-Hogares\\";
