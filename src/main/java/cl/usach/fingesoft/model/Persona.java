@@ -44,6 +44,71 @@ public class Persona {
 	private int p12PaisGrupo;
 	private int escolaridad;
 	private int p16aGrupo;
+	private int region15R;
+	private int provincia15R;
+	private int comuna15R;
+	private int p10comuna15R;
+	private int p11comuna15R;
+	private int p12comuna15R;
+	
+	
+	public Persona() {
+	}
+	
+	
+	public Persona(String[] datos) {
+		this.region = Integer.parseInt(datos[0]);
+		this.provincia = Integer.parseInt(datos[1]);
+		this.comuna = Integer.parseInt(datos[2]); 
+		this.dc = Integer.parseInt(datos[3]);
+		this.area = Integer.parseInt(datos[4]);
+		this.zcLoc = Integer.parseInt(datos[5]);
+		this.idZonaLoc = Integer.parseInt(datos[6]);
+		this.nViv = Integer.parseInt(datos[7]);
+		this.nHogar = Integer.parseInt(datos[8]);
+		this.personaN = Integer.parseInt(datos[9]);
+		this.p07 = Integer.parseInt(datos[10]);
+		this.p08 = Integer.parseInt(datos[11]);
+		this.p09 = Integer.parseInt(datos[12]);
+		this.p10 = Integer.parseInt(datos[13]);
+		this.p10Comuna = Integer.parseInt(datos[14]);
+		this.p10Pais = Integer.parseInt(datos[15]);
+		this.p11 = Integer.parseInt(datos[16]);
+		this.p11Comuna = Integer.parseInt(datos[17]);
+		this.p11Pais = Integer.parseInt(datos[18]);
+		this.p12 = Integer.parseInt(datos[19]);
+		this.p12Comuna = Integer.parseInt(datos[20]);
+		this.p12Pais = Integer.parseInt(datos[21]);
+		this.p12aLlegada = Integer.parseInt(datos[22]);
+		this.p12aTramo = Integer.parseInt(datos[23]);
+		this.p13 = Integer.parseInt(datos[24]);
+		this.p14 = Integer.parseInt(datos[25]);
+		this.p15 = Integer.parseInt(datos[26]);
+		this.p15a = Integer.parseInt(datos[27]);
+		this.p16 = Integer.parseInt(datos[28]);
+		this.p16a = Integer.parseInt(datos[29]);
+		this.p16aOtro = Integer.parseInt(datos[30]);
+		this.p17 = Integer.parseInt(datos[31]);
+		this.p18 = datos[32];
+		this.p19 = Integer.parseInt(datos[33]);
+		this.p20 = Integer.parseInt(datos[34]);
+		this.p21m = Integer.parseInt(datos[35]);
+		this.p21a = Integer.parseInt(datos[36]);
+		this.p10PaisGrupo = Integer.parseInt(datos[37]);
+		this.p11PaisGrupo = Integer.parseInt(datos[38]);
+		this.p12PaisGrupo = Integer.parseInt(datos[39]);
+		this.escolaridad = Integer.parseInt(datos[40]);
+		this.p16aGrupo = Integer.parseInt(datos[41]);
+		this.region15R = Integer.parseInt(datos[42]);
+		this.provincia15R = Integer.parseInt(datos[43]);
+		this.comuna15R = Integer.parseInt(datos[44]);
+		this.p10comuna15R = Integer.parseInt(datos[45]);
+		this.p11comuna15R = Integer.parseInt(datos[46]);
+		this.p12comuna15R = Integer.parseInt(datos[47]);
+	}
+	
+	
+	
 	
 	
 	public int getRegion() {
@@ -297,6 +362,63 @@ public class Persona {
 	}
 	public void setP16aGrupo(int p16aGrupo) {
 		this.p16aGrupo = p16aGrupo;
+	}
+
+	public int getRegion15R() {
+		return region15R;
+	}
+	public void setRegion15R(int region15r) {
+		region15R = region15r;
+	}
+
+
+	public int getProvincia15R() {
+		return provincia15R;
+	}
+
+
+	public void setProvincia15R(int provincia15r) {
+		provincia15R = provincia15r;
+	}
+
+
+	public int getComuna15R() {
+		return comuna15R;
+	}
+
+
+	public void setComuna15R(int comuna15r) {
+		comuna15R = comuna15r;
+	}
+
+
+	public int getP10comuna15R() {
+		return p10comuna15R;
+	}
+
+
+	public void setP10comuna15R(int p10comuna15r) {
+		p10comuna15R = p10comuna15r;
+	}
+
+
+	public int getP11comuna15R() {
+		return p11comuna15R;
+	}
+
+
+	public void setP11comuna15R(int p11comuna15r) {
+		p11comuna15R = p11comuna15r;
+	}
+
+
+	public int getP12comuna15R() {
+		return p12comuna15R;
+	}
+
+
+	public void setP12comuna15R(int p12comuna15r) {
+		p12comuna15R = p12comuna15r;
 	}
 	
 	

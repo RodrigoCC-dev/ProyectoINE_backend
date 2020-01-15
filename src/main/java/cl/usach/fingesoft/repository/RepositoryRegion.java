@@ -32,7 +32,7 @@ public class RepositoryRegion {
 		String texto = "";
 		String[] info;
 		try {
-			FileReader archivo = new FileReader(repoArchivos.getRutaGeografica() + nombreArchivo);
+			FileReader archivo = new FileReader(repoArchivos.getRutaPrincipal() + repoArchivos.getRutaGeografica() + nombreArchivo);
 			BufferedReader contenido = new BufferedReader(archivo);
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {
@@ -57,7 +57,7 @@ public class RepositoryRegion {
 		String texto = "";
 		String[] info;
 		try {
-			FileReader archivo = new FileReader(repoArchivos.getRutaGeografica() + nombreArchivo);
+			FileReader archivo = new FileReader(repoArchivos.getRutaPrincipal() + repoArchivos.getRutaGeografica() + nombreArchivo);
 			BufferedReader contenido = new BufferedReader(archivo);
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {
@@ -84,7 +84,7 @@ public class RepositoryRegion {
 		Provincia newProvincia = new Provincia();
 		List<Integer> idProvincias = new ArrayList<>();
 		try {
-			FileReader archivo = new FileReader(repoArchivos.getRutaGeografica() + nombreArchivo);
+			FileReader archivo = new FileReader(repoArchivos.getRutaPrincipal() + repoArchivos.getRutaGeografica() + nombreArchivo);
 			BufferedReader contenido = new BufferedReader(archivo);
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {

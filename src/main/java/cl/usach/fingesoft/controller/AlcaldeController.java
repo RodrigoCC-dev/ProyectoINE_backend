@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import cl.usach.fingesoft.data.Area;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Comuna;
 import cl.usach.fingesoft.model.Hogar;
+import cl.usach.fingesoft.model.Vivienda;
 import cl.usach.fingesoft.service.ServiceAlcalde;
 
 @RestController
@@ -49,6 +51,18 @@ public class AlcaldeController {
 		return serviceAlcalde.obtenerTipologiaXsector(comuna, localidad);
 	}
 	
+	@PostMapping("/area_comuna")
+	public Area obtenerAreas(@RequestBody Map<String,String> body) {
+		String comuna = body.get("Comuna");
+		return serviceAlcalde.obtenerAreas(comuna);
+	}
+	
+	@PostMapping("/area_localidad")
+	public Area obtenerAreasXsector(@RequestBody Map<String,String> body) {
+		String comuna = body.get("Comuna");
+		String localidad = body.get("Localidad");
+		return serviceAlcalde.obtenerAreasXsector(comuna, localidad);
+	}
 	
 	//Test//
 	@PostMapping("/test/hogares_comuna")
@@ -75,5 +89,43 @@ public class AlcaldeController {
 		return serviceAlcalde.getTipologias();
 	}
 	
+	
+	@PostMapping("/test/viviendas_comuna")
+	public List<Vivienda> getViviendasByComuna(@RequestBody Map<String,String> body){
+		String nombre = body.get("Comuna");
+		return serviceAlcalde.getViviendasByComuna(nombre);
+	}
+	
+	@PostMapping("/test/viviendas_provincia")
+	public List<Vivienda> getViviendasByProvincia(@RequestBody Map<String,String> body){
+		String nombre = body.get("Provincia");
+		return serviceAlcalde.getViviendasByProvincia(nombre);
+	}
+	
+	@PostMapping("/test/viviendas_localidad")
+	public List<Vivienda> getViviendasByLocalidad(@RequestBody Map<String,String> body){
+		String comuna = body.get("Comuna");
+		String localidad = body.get("Localidad");
+		return serviceAlcalde.getViviendasByLocalidad(comuna, localidad);
+	}
+	
+	@PostMapping("/test/viviendas_region")
+	public List<Vivienda> getViviendasByRegion(@RequestBody Map<String,String> body){
+		String region = body.get("Region");
+		return serviceAlcalde.getViviendaByRegion(region);
+	}
+	
+	@PostMapping("/test/areas_comuna")
+	public Area getAreasPorComuna(@RequestBody Map<String,String> body) {
+		String comuna = body.get("Comuna");
+		return serviceAlcalde.getAreasPorComuna(comuna);
+	}
+	
+	@PostMapping("/test/areas_localidad")
+	public Area getAreaPorLocalidad(@RequestBody Map<String,String> body) {
+		String comuna = body.get("Comuna");
+		String localidad = body.get("Localidad");
+		return serviceAlcalde.getAreasPorLocalidad(comuna, localidad);
+	}
 }
 

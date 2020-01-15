@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import cl.usach.fingesoft.data.Area;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Distrito;
 import cl.usach.fingesoft.service.ServiceDiputado;
@@ -31,5 +32,11 @@ public class DiputadoController {
 	public TipologiaHogar obtenerTipologia(@RequestBody Map<String,String> body) {
 		String numero = body.get("Distrito");
 		return serviceDiputado.obtenerTipologia(Integer.parseInt(numero));
+	}
+	
+	@PostMapping("/area_distrito")
+	public Area obtenerAreas(@RequestBody Map<String,String> body) {
+		String numero = body.get("Distrito");
+		return serviceDiputado.obtenerAreas(Integer.parseInt(numero));
 	}
 }

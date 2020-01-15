@@ -47,23 +47,12 @@ public class RepositoryHogar {
 		String texto = "";
 		String[] info;
 		try {
-			FileReader archivo = new FileReader(repoArchivos.getRutaHogares() + nombreArchivo);
+			FileReader archivo = new FileReader(repoArchivos.getRutaPrincipal() + repoArchivos.getRutaHogares() + nombreArchivo);
 			BufferedReader contenido = new BufferedReader(archivo);
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {
 				info = texto.split(";");
-				Hogar nuevoHogar = new Hogar();
-				nuevoHogar.setRegion(Integer.parseInt(info[0]));
-				nuevoHogar.setProvincia(Integer.parseInt(info[1]));
-				nuevoHogar.setComuna(Integer.parseInt(info[2]));
-				nuevoHogar.setDc(Integer.parseInt(info[3]));
-				nuevoHogar.setArea(Integer.parseInt(info[4]));
-				nuevoHogar.setZcLoc(Integer.parseInt(info[5]));
-				nuevoHogar.setIdZonaLoc(Integer.parseInt(info[6]));
-				nuevoHogar.setnViv(Integer.parseInt(info[7]));
-				nuevoHogar.setnHogar(Integer.parseInt(info[8]));
-				nuevoHogar.setTipoHogar(Integer.parseInt(info[9]));
-				nuevoHogar.setTipoOperativo(Integer.parseInt(info[10]));
+				Hogar nuevoHogar = new Hogar(info);
 				hogares.add(nuevoHogar);
 			}
 			contenido.close();
@@ -85,52 +74,30 @@ public class RepositoryHogar {
 		if(comuna.getNumero() != 0) {
 			nombreFuente = nombreFuente + comuna.getNombre() + ".csv";
 			try {
-				FileReader archivo = new FileReader(repoArchivos.getRutaHogares() + nombreFuente);
+				FileReader archivo = new FileReader(repoArchivos.getRutaPrincipal() + repoArchivos.getRutaHogares() + nombreFuente);
 				BufferedReader contenido = new BufferedReader(archivo);
 				texto = contenido.readLine();
 				while((texto = contenido.readLine()) != null) {
 					info = texto.split(";");
-					Hogar nuevoHogar = new Hogar();
-					nuevoHogar.setRegion(Integer.parseInt(info[0]));
-					nuevoHogar.setProvincia(Integer.parseInt(info[1]));
-					nuevoHogar.setComuna(Integer.parseInt(info[2]));
-					nuevoHogar.setDc(Integer.parseInt(info[3]));
-					nuevoHogar.setArea(Integer.parseInt(info[4]));
-					nuevoHogar.setZcLoc(Integer.parseInt(info[5]));
-					nuevoHogar.setIdZonaLoc(Integer.parseInt(info[6]));
-					nuevoHogar.setnViv(Integer.parseInt(info[7]));
-					nuevoHogar.setnHogar(Integer.parseInt(info[8]));
-					nuevoHogar.setTipoHogar(Integer.parseInt(info[9]));
-					nuevoHogar.setTipoOperativo(Integer.parseInt(info[10]));
+					Hogar nuevoHogar = new Hogar(info);
 					hogares.add(nuevoHogar);
 				}
 				contenido.close();
 			}
 			catch(Exception e) {
 				try {
-					FileReader archivo = new FileReader(repoArchivos.getRutaHogares() + nombreArchivo);
+					FileReader archivo = new FileReader(repoArchivos.getRutaPrincipal() + repoArchivos.getRutaHogares() + nombreArchivo);
 					BufferedReader contenido = new BufferedReader(archivo);
 					texto = contenido.readLine();
 					while((texto = contenido.readLine()) != null) {
 						info = texto.split(";");
 						if(Integer.parseInt(info[2]) == comuna.getNumero()) {
-							Hogar nuevoHogar = new Hogar();
-							nuevoHogar.setRegion(Integer.parseInt(info[0]));
-							nuevoHogar.setProvincia(Integer.parseInt(info[1]));
-							nuevoHogar.setComuna(Integer.parseInt(info[2]));
-							nuevoHogar.setDc(Integer.parseInt(info[3]));
-							nuevoHogar.setArea(Integer.parseInt(info[4]));
-							nuevoHogar.setZcLoc(Integer.parseInt(info[5]));
-							nuevoHogar.setIdZonaLoc(Integer.parseInt(info[6]));
-							nuevoHogar.setnViv(Integer.parseInt(info[7]));
-							nuevoHogar.setnHogar(Integer.parseInt(info[8]));
-							nuevoHogar.setTipoHogar(Integer.parseInt(info[9]));
-							nuevoHogar.setTipoOperativo(Integer.parseInt(info[10]));
+							Hogar nuevoHogar = new Hogar(info);
 							hogares.add(nuevoHogar);
 						}
 					}
 					contenido.close();
-					repoArchivos.guardarHogaresPorComuna(nombre, repoArchivos.getRutaHogares());
+					repoArchivos.guardarHogaresPorComuna(nombre, repoArchivos.getRutaPrincipal() + repoArchivos.getRutaHogares());
 				}
 				catch (Exception ex) {
 					LOG.error("Error con findByComuna. No es posible abrir archivo " + nombreArchivo);
@@ -216,8 +183,8 @@ public class RepositoryHogar {
 	}
 	
 	
-	public List<Hogar> findByCircunscripcion(int Circunscripcion){
-		Circunscripcion nuevoCircns = repoCircunscripcion.findCircunscripcion(Circunscripcion);
+	public List<Hogar> findByCircunscripcion(int circunscripcion){
+		Circunscripcion nuevoCircns = repoCircunscripcion.findCircunscripcion(circunscripcion);
 		List<Hogar> hogares = new ArrayList<>();
 		String nombreComuna = "";
 		for(int i = 0; i < nuevoCircns.getListaComunas().size(); i++) {

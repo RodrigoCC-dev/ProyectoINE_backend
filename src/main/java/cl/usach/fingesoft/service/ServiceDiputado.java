@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cl.usach.fingesoft.data.Area;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Distrito;
 import cl.usach.fingesoft.model.Hogar;
@@ -32,6 +33,8 @@ public class ServiceDiputado {
 	@Autowired
 	private TipologiaHogar tipoHogar;
 	
+	@Autowired
+	private Area area;
 	
 	public Distrito getDistrito(int numero) {
 		return repoDistrito.findDistrito(numero);
@@ -40,5 +43,10 @@ public class ServiceDiputado {
 	public TipologiaHogar obtenerTipologia(int distrito) {
 		List<Hogar> hogares = repoHogar.findByDistrito(distrito);
 		return tipoHogar.calcularTipologia(hogares);
+	}
+	
+	public Area obtenerAreas(int distrito) {
+		Distrito nuevoDist = repoDistrito.findDistrito(distrito);
+		return area.calcularAreaPorComunas(nuevoDist.getListaComunas());
 	}
 }

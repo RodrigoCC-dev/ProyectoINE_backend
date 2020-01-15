@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cl.usach.fingesoft.data.Area;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Hogar;
 import cl.usach.fingesoft.model.Provincia;
@@ -41,6 +42,9 @@ public class ServiceGore {
 	@Autowired
 	private TipologiaHogar tipoHogar;
 	
+	@Autowired
+	private Area area;
+	
 	
 	public Provincia getProvinciaByNombre(String nombre) {
 		Provincia nueva = repoProvincia.findDatos(nombre);
@@ -64,4 +68,15 @@ public class ServiceGore {
 		return tipoHogar.calcularTipologia(hogares);
 	}
 	
+	public Area obtenerAreas(String region) {
+		Region nuevaReg = repoRegion.findDatos(region);
+		nuevaReg = repoRegion.findProvincias(nuevaReg);
+		return area.calcularAreaPorProvincias(nuevaReg.getListaProvincias());
+	}
+	
+	public Area obtenerAreasXprovincia(String provincia) {
+		Provincia nuevaProv = repoProvincia.findDatos(provincia);
+		nuevaProv = repoProvincia.findComunas(nuevaProv);
+		return area.calcularAreaPorComunas(nuevaProv.getListaComunas());
+	}
 }

@@ -15,6 +15,26 @@ public class Hogar {
 	private int tipoOperativo;
 	
 	
+	
+	public Hogar() {
+	}
+	
+	
+	public Hogar(String[] datos) {
+		this.region = Integer.parseInt(datos[0]);
+		this.provincia = Integer.parseInt(datos[1]);
+		this.comuna = Integer.parseInt(datos[2]);
+		this.dc = Integer.parseInt(datos[3]);
+		this.area = Integer.parseInt(datos[4]);
+		this.zcLoc = Integer.parseInt(datos[5]);
+		this.idZonaLoc = Integer.parseInt(datos[6]);
+		this.nViv = Integer.parseInt(datos[7]);
+		this.nHogar = Integer.parseInt(datos[8]);
+		this.tipoHogar = Integer.parseInt(datos[9]);
+		this.tipoOperativo = Integer.parseInt(datos[10]);
+	}
+	
+	
 	public int getRegion() {
 		return region;
 	}

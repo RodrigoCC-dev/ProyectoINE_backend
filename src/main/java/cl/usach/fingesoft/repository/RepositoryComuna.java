@@ -29,7 +29,7 @@ public class RepositoryComuna {
 		String[] info;
 		int num;
 		try {
-			FileReader lector = new FileReader(repoArchivos.getRutaGeografica() + nombreArchivo);
+			FileReader lector = new FileReader(repoArchivos.getRutaPrincipal() + repoArchivos.getRutaGeografica() + nombreArchivo);
 			BufferedReader contenido = new BufferedReader(lector);
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {
@@ -54,7 +54,7 @@ public class RepositoryComuna {
 		String texto = "";
 		String[] info;
 		try {
-			FileReader archivo = new FileReader(repoArchivos.getRutaGeografica() + nombreArchivo);
+			FileReader archivo = new FileReader(repoArchivos.getRutaPrincipal() + repoArchivos.getRutaGeografica() + nombreArchivo);
 			BufferedReader contenido = new BufferedReader(archivo);
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {
@@ -80,7 +80,7 @@ public class RepositoryComuna {
 		List<Integer> lista = new ArrayList<>();
 		List<String> localidades = new ArrayList<>();
 		try {
-			FileReader lector = new FileReader(repoArchivos.getRutaGeografica() + nombreArchivo);
+			FileReader lector = new FileReader(repoArchivos.getRutaPrincipal() + repoArchivos.getRutaGeografica() + nombreArchivo);
 			BufferedReader contenido = new BufferedReader(lector);
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {
