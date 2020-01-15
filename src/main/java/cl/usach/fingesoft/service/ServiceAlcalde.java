@@ -59,6 +59,14 @@ public class ServiceAlcalde {
 		return tipoHogar.calcularTipologia(hogares);
 	}
 	
+	public Area obtenerAreas(String comuna) {
+		return area.calcularAreaPorComuna(comuna);
+	}
+	
+	public Area obtenerAreasXsector(String comuna, String localidad) {
+		return area.calcularAreaPorLocalidad(comuna, localidad);
+	}
+	
 	
 	//Test//
 	//Para prueba de métodos Repository. Eliminar posteriormente
@@ -96,7 +104,7 @@ public class ServiceAlcalde {
 		return repoVivienda.findByRegion(region);
 	}
 		
-	public Area getAreas() {
-		return area.calcularArea(repoPersona.findAll());
+	public Area getAreasPorComuna(String comuna) {
+		return area.calcularAreaPorComuna(comuna);
 	}
 }
