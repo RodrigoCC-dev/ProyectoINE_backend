@@ -12,15 +12,11 @@ import cl.usach.fingesoft.model.Hogar;
 import cl.usach.fingesoft.model.Vivienda;
 import cl.usach.fingesoft.repository.RepositoryComuna;
 import cl.usach.fingesoft.repository.RepositoryHogar;
-import cl.usach.fingesoft.repository.RepositoryPersona;
 import cl.usach.fingesoft.repository.RepositoryVivienda;
 
 @Service
 public class ServiceAlcalde {
 
-	@Autowired
-	private RepositoryPersona repoPersona;
-	
 	@Autowired
 	private RepositoryVivienda repoVivienda;
 	
@@ -106,5 +102,9 @@ public class ServiceAlcalde {
 		
 	public Area getAreasPorComuna(String comuna) {
 		return area.calcularAreaPorComuna(comuna);
+	}
+	
+	public Area getAreasPorLocalidad(String comuna, String localidad) {
+		return area.calcularAreaPorLocalidad(comuna, localidad);
 	}
 }

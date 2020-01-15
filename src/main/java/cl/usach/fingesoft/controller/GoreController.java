@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import cl.usach.fingesoft.data.Area;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Provincia;
 import cl.usach.fingesoft.model.Region;
@@ -46,4 +47,15 @@ public class GoreController {
 		return serviceGore.obtenerTipologiaXprovincia(nombre);
 	}
 	
+	@PostMapping("/area_region")
+	public Area obtenerAreas(@RequestBody Map<String,String> body) {
+		String nombre = body.get("Region");
+		return serviceGore.obtenerAreas(nombre);
+	}
+	
+	@PostMapping("/area_provincia")
+	public Area obtenerAreasXprovincia(@RequestBody Map<String,String> body) {
+		String nombre = body.get("Provincia");
+		return serviceGore.obtenerAreasXprovincia(nombre);
+	}
 }

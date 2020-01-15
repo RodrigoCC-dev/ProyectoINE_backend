@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cl.usach.fingesoft.data.Area;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Circunscripcion;
 import cl.usach.fingesoft.model.Hogar;
@@ -32,6 +33,8 @@ public class ServiceSenador {
 	@Autowired
 	private TipologiaHogar tipoHogar;
 	
+	@Autowired
+	private Area area;
 	
 	public Circunscripcion getCircunscripcion(int numero) {
 		return repoCircunscripcion.findCircunscripcion(numero);
@@ -42,5 +45,7 @@ public class ServiceSenador {
 		return tipoHogar.calcularTipologia(hogares);
 	}
 	
-	
+	public Area obtenerAreas(int numero) {
+		return area.calcularAreaPorCircunscripcion(numero);
+	}
 }

@@ -54,11 +54,11 @@ public class AlcaldeController {
 	@PostMapping("/area_comuna")
 	public Area obtenerAreas(@RequestBody Map<String,String> body) {
 		String comuna = body.get("Comuna");
-		return serviceAlcalde.getAreasPorComuna(comuna);
+		return serviceAlcalde.obtenerAreas(comuna);
 	}
 	
 	@PostMapping("/area_localidad")
-	public Area obtenerAreasXsector(Map<String,String> body) {
+	public Area obtenerAreasXsector(@RequestBody Map<String,String> body) {
 		String comuna = body.get("Comuna");
 		String localidad = body.get("Localidad");
 		return serviceAlcalde.obtenerAreasXsector(comuna, localidad);
@@ -119,6 +119,13 @@ public class AlcaldeController {
 	public Area getAreasPorComuna(@RequestBody Map<String,String> body) {
 		String comuna = body.get("Comuna");
 		return serviceAlcalde.getAreasPorComuna(comuna);
+	}
+	
+	@PostMapping("/test/areas_localidad")
+	public Area getAreaPorLocalidad(@RequestBody Map<String,String> body) {
+		String comuna = body.get("Comuna");
+		String localidad = body.get("Localidad");
+		return serviceAlcalde.getAreasPorLocalidad(comuna, localidad);
 	}
 }
 
