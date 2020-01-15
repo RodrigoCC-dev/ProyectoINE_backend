@@ -12,25 +12,12 @@ import org.springframework.stereotype.Component;
 
 import cl.usach.fingesoft.model.Comuna;
 import cl.usach.fingesoft.model.Persona;
-import cl.usach.fingesoft.model.Provincia;
 
 @Component
 public class RepositoryPersona {
 
 	@Autowired
 	private RepositoryComuna repoComuna;
-	
-	@Autowired
-	private RepositoryProvincia repoProvincia;
-	
-	@Autowired
-	private RepositoryRegion repoRegion;
-	
-	@Autowired
-	private RepositoryDistrito repoDistrito;
-	
-	@Autowired
-	private RepositoryCircunscripcion repoCircunscripcion;
 	
 	@Autowired
 	private RepositoryArchivos repoArchivos;
@@ -108,21 +95,26 @@ public class RepositoryPersona {
 	
 	
 	
-	public List<Persona> findByProvincia(String provincia){
-		Provincia nuevaProv = repoProvincia.findDatos(provincia);
-		nuevaProv = repoProvincia.findComunas(nuevaProv);
-		List<Persona> personas = new ArrayList<>();
-		String nombreComuna = "";
-		if(nuevaProv.getNumero() != 0) {
-			for(int i = 0; i < nuevaProv.getListaComunas().size(); i++) {
-				nombreComuna = nuevaProv.getListaComunas().get(i).getNombre();
-				personas.addAll(this.findByComuna(nombreComuna));
+	public List<Persona> findByLocalidad(String comuna, String localidad){
+		Comuna nuevaComuna = repoComuna.findDatos(comuna);
+		nuevaComuna = repoComuna.findLocalidades(nuevaComuna);
+		int idLocalidad = 0;
+		int posicion = 0;
+		List<Persona> personas;
+		List<Persona> locales = new ArrayList<>();
+		for(int i = 0; i < nuevaComuna.getLocalidades().size(); i ++) {
+			if(localidad.toUpperCase().equals(nuevaComuna.getLocalidades().get(i))) {
+				posicion = nuevaComuna.getLocalidades().indexOf(localidad.toUpperCase());
+				idLocalidad = nuevaComuna.getDc().get(posicion);
 			}
 		}
-		else {
-			LOG.error("Error con findByProvincia. No se encuentra la provincia " + provincia);
+		personas = this.findByComuna(comuna);
+		for(int j = 0; j < personas.size(); j++) {
+			if(personas.get(j).getDc() == idLocalidad) {
+				locales.add(personas.get(j));
+			}
 		}
-		return personas;
+		return locales;
 	}
 	
 	
