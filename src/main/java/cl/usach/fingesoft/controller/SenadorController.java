@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import cl.usach.fingesoft.data.Area;
+import cl.usach.fingesoft.data.Escolaridad;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Circunscripcion;
 import cl.usach.fingesoft.service.ServiceSenador;
@@ -22,21 +23,27 @@ public class SenadorController {
 	ServiceSenador serviceSenador;
 	
 	
-	@PostMapping("/datos_circunscripcion")
+	@PostMapping("/datos/circunscripcion")
 	public Circunscripcion getDatosCircunscricpion(@RequestBody Map<String,String> body) {
 		String numero = body.get("Circunscripcion");
 		return serviceSenador.getCircunscripcion(Integer.parseInt(numero));
 	}
 	
-	@PostMapping("/tipologia_circunscripcion")
+	@PostMapping("/tipologia/circunscripcion")
 	public TipologiaHogar obtenerTipologia(@RequestBody Map<String,String> body) {
 		String numero = body.get("Circunscripcion");
 		return serviceSenador.obtenerTipologia(Integer.parseInt(numero));
 	}
 	
-	@PostMapping("area_circunscripcion")
+	@PostMapping("/area/circunscripcion")
 	public Area obtenerAreas(@RequestBody Map<String,String> body) {
 		String numero = body.get("Circunscripcion");
 		return serviceSenador.obtenerAreas(Integer.parseInt(numero));
+	}
+	
+	@PostMapping("/escolaridad/circunscripcion")
+	public Escolaridad obtenerEscolaridad(@RequestBody Map<String,String> body) {
+		String numero = body.get("Circunscripcion");
+		return serviceSenador.obtenerEscolaridad(Integer.parseInt(numero));
 	}
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import cl.usach.fingesoft.data.Area;
+import cl.usach.fingesoft.data.Escolaridad;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Distrito;
 import cl.usach.fingesoft.service.ServiceDiputado;
@@ -22,21 +23,27 @@ public class DiputadoController {
 	ServiceDiputado serviceDiputado;
 	
 	
-	@PostMapping("/datos_distrito")
+	@PostMapping("/datos/distrito")
 	public Distrito getDatosDistrito(@RequestBody Map<String,String> body) {
 		String numero = body.get("Distrito");
 		return serviceDiputado.getDistrito(Integer.parseInt(numero));
 	}
 	
-	@PostMapping("/tipologia_distrito")
+	@PostMapping("/tipologia/distrito")
 	public TipologiaHogar obtenerTipologia(@RequestBody Map<String,String> body) {
 		String numero = body.get("Distrito");
 		return serviceDiputado.obtenerTipologia(Integer.parseInt(numero));
 	}
 	
-	@PostMapping("/area_distrito")
+	@PostMapping("/area/distrito")
 	public Area obtenerAreas(@RequestBody Map<String,String> body) {
 		String numero = body.get("Distrito");
 		return serviceDiputado.obtenerAreas(Integer.parseInt(numero));
+	}
+	
+	@PostMapping("/escolaridad/distrito")
+	public Escolaridad obtenerEscolaridad(@RequestBody Map<String,String> body) {
+		String numero = body.get("Distrito");
+		return serviceDiputado.obtenerEscolaridad(Integer.parseInt(numero));
 	}
 }

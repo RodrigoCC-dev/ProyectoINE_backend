@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import cl.usach.fingesoft.data.Area;
+import cl.usach.fingesoft.data.Escolaridad;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Provincia;
 import cl.usach.fingesoft.model.Region;
@@ -23,39 +24,51 @@ public class GoreController {
 	ServiceGore serviceGore;
 	
 	
-	@PostMapping("/datos_provincia")
+	@PostMapping("/datos/provincia")
 	public Provincia getDatosProvincia(@RequestBody Map<String,String> body) {
 		String nombre = body.get("Provincia");
 		return serviceGore.getProvinciaByNombre(nombre);
 	}
 	
-	@PostMapping("/datos_region")
+	@PostMapping("/datos/region")
 	public Region getDatosRegion(@RequestBody Map<String,String> body) {
 		String nombre = body.get("Region");
 		return serviceGore.getRegionByNombre(nombre);
 	}
 	
-	@PostMapping("/tipologia_region")
+	@PostMapping("/tipologia/region")
 	public TipologiaHogar obtenerTipologia(@RequestBody Map<String,String> body) {
 		String nombre = body.get("Region");
 		return serviceGore.obtenerTipologia(nombre);
 	}
 	
-	@PostMapping("/tipologia_provincia")
+	@PostMapping("/tipologia/provincia")
 	public TipologiaHogar obtenerTipologiaXprovincia(@RequestBody Map<String,String> body) {
 		String nombre = body.get("Provincia");
 		return serviceGore.obtenerTipologiaXprovincia(nombre);
 	}
 	
-	@PostMapping("/area_region")
+	@PostMapping("/area/region")
 	public Area obtenerAreas(@RequestBody Map<String,String> body) {
 		String nombre = body.get("Region");
 		return serviceGore.obtenerAreas(nombre);
 	}
 	
-	@PostMapping("/area_provincia")
+	@PostMapping("/area/provincia")
 	public Area obtenerAreasXprovincia(@RequestBody Map<String,String> body) {
 		String nombre = body.get("Provincia");
 		return serviceGore.obtenerAreasXprovincia(nombre);
+	}
+	
+	@PostMapping("/escolaridad/region")
+	public Escolaridad obtenerEscolaridad(@RequestBody Map<String,String> body) {
+		String nombre = body.get("Region");
+		return serviceGore.obtenerEscolaridad(nombre);
+	}
+	
+	@PostMapping("/escolaridad/provincia")
+	public Escolaridad obtenerEscolaridadXsector(@RequestBody Map<String,String> body) {
+		String nombre = body.get("Provincia");
+		return serviceGore.obtenerEscolaridadXsector(nombre);
 	}
 }

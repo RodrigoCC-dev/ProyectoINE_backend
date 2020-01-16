@@ -6,30 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cl.usach.fingesoft.data.Area;
+import cl.usach.fingesoft.data.Escolaridad;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Hogar;
 import cl.usach.fingesoft.model.Provincia;
 import cl.usach.fingesoft.model.Region;
 import cl.usach.fingesoft.repository.RepositoryHogar;
-import cl.usach.fingesoft.repository.RepositoryPersona;
 import cl.usach.fingesoft.repository.RepositoryProvincia;
 import cl.usach.fingesoft.repository.RepositoryRegion;
-import cl.usach.fingesoft.repository.RepositoryRegion;
-import cl.usach.fingesoft.repository.RepositoryVivienda;
 
 @Service
 public class ServiceGore {
 	
-	/**
-	@Autowired
-	private RepositoryPersona repoPersona;
-	
-	@Autowired
-	private RepositoryVivienda repoVivienda;
-	
-	@Autowired
-	private RepositoryHogar repoHogar;
-	**/
 	@Autowired
 	private RepositoryRegion repoRegion;
 	
@@ -44,6 +32,9 @@ public class ServiceGore {
 	
 	@Autowired
 	private Area area;
+	
+	@Autowired
+	private Escolaridad escolaridad;
 	
 	
 	public Provincia getProvinciaByNombre(String nombre) {
@@ -79,4 +70,17 @@ public class ServiceGore {
 		nuevaProv = repoProvincia.findComunas(nuevaProv);
 		return area.calcularAreaPorComunas(nuevaProv.getListaComunas());
 	}
+	
+	public Escolaridad obtenerEscolaridad(String region) {
+		Region nuevaReg = repoRegion.findDatos(region);
+		nuevaReg = repoRegion.findProvincias(nuevaReg);
+		return escolaridad.calcularEscolaridadPorProvincias(nuevaReg.getListaProvincias());
+	}
+	
+	public Escolaridad obtenerEscolaridadXsector(String provincia) {
+		Provincia nuevaProv = repoProvincia.findDatos(provincia);
+		nuevaProv = repoProvincia.findComunas(nuevaProv);
+		return escolaridad.calcuarEscolaridadPorComunas(nuevaProv.getListaComunas());
+	}
+	
 }

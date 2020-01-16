@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import cl.usach.fingesoft.data.Area;
+import cl.usach.fingesoft.data.Escolaridad;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Comuna;
 import cl.usach.fingesoft.model.Hogar;
@@ -26,42 +27,55 @@ public class AlcaldeController {
 	ServiceAlcalde serviceAlcalde;
 	
 
-	@PostMapping("/datos_comuna")
+	@PostMapping("/datos/comuna")
 	public Comuna getDatos(@RequestBody Map<String,String> body) {
 		String nombre = body.get("Comuna");
 		return serviceAlcalde.getComunaByNombre(nombre);
 	}
 	
-	@PostMapping("/codigo_comuna")
+	@PostMapping("/codigo/comuna")
 	public Comuna getComunaByCodigo(@RequestBody Map<String,String> body) {
 		int codigo = Integer.parseInt(body.get("Codigo"));
 		return serviceAlcalde.getComunaByCodigo(codigo);
 	}
 	
-	@PostMapping("/tipologia_comuna")
+	@PostMapping("/tipologia/comuna")
 	public TipologiaHogar obtenerTipologia(@RequestBody Map<String,String> body) {
 		String nombre = body.get("Comuna");
 		return serviceAlcalde.obtenerTipología(nombre);
 	}
 	
-	@PostMapping("/tipologia_localidad")
+	@PostMapping("/tipologia/localidad")
 	public TipologiaHogar obtenerTipologiaXsector(@RequestBody Map<String,String> body) {
 		String comuna = body.get("Comuna");
 		String localidad = body.get("Localidad");
 		return serviceAlcalde.obtenerTipologiaXsector(comuna, localidad);
 	}
 	
-	@PostMapping("/area_comuna")
+	@PostMapping("/area/comuna")
 	public Area obtenerAreas(@RequestBody Map<String,String> body) {
 		String comuna = body.get("Comuna");
 		return serviceAlcalde.obtenerAreas(comuna);
 	}
 	
-	@PostMapping("/area_localidad")
+	@PostMapping("/area/localidad")
 	public Area obtenerAreasXsector(@RequestBody Map<String,String> body) {
 		String comuna = body.get("Comuna");
 		String localidad = body.get("Localidad");
 		return serviceAlcalde.obtenerAreasXsector(comuna, localidad);
+	}
+	
+	@PostMapping("/escolaridad/comuna")
+	public Escolaridad obtenerEscolaridad(@RequestBody Map<String,String> body) {
+		String comuna = body.get("Comuna");
+		return serviceAlcalde.obtenerEscolaridad(comuna);
+	}
+	
+	@PostMapping("/escolaridad/localidad")
+	public Escolaridad obtenerEscolaridadXsector(@RequestBody Map<String,String> body) {
+		String comuna = body.get("Comuna");
+		String localidad = body.get("Localidad");
+		return serviceAlcalde.obtenerEscolaridadXsector(comuna, localidad);
 	}
 	
 	//Test//

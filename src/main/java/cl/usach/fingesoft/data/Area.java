@@ -6,36 +6,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import cl.usach.fingesoft.model.Circunscripcion;
 import cl.usach.fingesoft.model.Comuna;
-import cl.usach.fingesoft.model.Distrito;
-import cl.usach.fingesoft.model.Hogar;
 import cl.usach.fingesoft.model.Persona;
 import cl.usach.fingesoft.model.Provincia;
-import cl.usach.fingesoft.model.Region;
-import cl.usach.fingesoft.repository.RepositoryCircunscripcion;
-import cl.usach.fingesoft.repository.RepositoryDistrito;
 import cl.usach.fingesoft.repository.RepositoryPersona;
-import cl.usach.fingesoft.repository.RepositoryProvincia;
-import cl.usach.fingesoft.repository.RepositoryRegion;
 
 @Component
 public class Area {
 
 	private double rural;
 	private double urbana;
-	
-	@Autowired
-	private RepositoryProvincia repoProvincia;
-	
-	@Autowired
-	private RepositoryRegion repoRegion;
-	
-	@Autowired
-	private RepositoryDistrito repoDistrito;
-	
-	@Autowired
-	private RepositoryCircunscripcion repoCircunscripcion;
 	
 	@Autowired
 	private RepositoryPersona repoPersona;
@@ -54,26 +34,6 @@ public class Area {
 		this.urbana = urbana;
 	}
 	
-	
-	public Area calcularArea(List<Persona> listaPersonas) {
-		double total = 0;
-		double urbano = 0;
-		double rural = 0;
-		Area distribucion = new Area();
-		for(int i = 0; i < listaPersonas.size(); i++) {
-			if(listaPersonas.get(i).getArea() == 1) {
-				urbano++;
-				total++;
-			}
-			else if(listaPersonas.get(i).getArea() == 2) {
-				rural++;
-				total++;
-			}
-		}
-		distribucion.setUrbana((urbano / total) * 100);
-		distribucion.setRural((rural / total) * 100);
-		return distribucion;
-	}
 	
 	
 	public List<Double> registrosPorComuna(String comuna){

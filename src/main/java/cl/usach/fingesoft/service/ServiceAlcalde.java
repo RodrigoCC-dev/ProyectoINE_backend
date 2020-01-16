@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cl.usach.fingesoft.data.Area;
+import cl.usach.fingesoft.data.Escolaridad;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Comuna;
 import cl.usach.fingesoft.model.Hogar;
@@ -31,6 +32,9 @@ public class ServiceAlcalde {
 	
 	@Autowired
 	private Area area;
+	
+	@Autowired
+	private Escolaridad escolaridad;
 	
 	
 	public Comuna getComunaByNombre(String nombre) {
@@ -63,6 +67,13 @@ public class ServiceAlcalde {
 		return area.calcularAreaPorLocalidad(comuna, localidad);
 	}
 	
+	public Escolaridad obtenerEscolaridad(String comuna) {
+		return escolaridad.calcularEscolaridadPorComuna(comuna);
+	}
+	
+	public Escolaridad obtenerEscolaridadXsector(String comuna, String localidad) {
+		return escolaridad.calcularEscolaridadPorLocalidad(comuna, localidad);
+	}
 	
 	//Test//
 	//Para prueba de métodos Repository. Eliminar posteriormente

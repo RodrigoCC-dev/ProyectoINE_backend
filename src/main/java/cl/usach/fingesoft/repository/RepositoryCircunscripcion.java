@@ -33,7 +33,7 @@ public class RepositoryCircunscripcion {
 		List<Comuna> comunas = new ArrayList<Comuna>();
 		Comuna newComuna = new Comuna();
 		try {
-			FileReader archivo = new FileReader(repoArchivos.getRutaParlamentarios() + nombreArchivo);
+			FileReader archivo = new FileReader(repoArchivos.getRutaPrincipal() + nombreArchivo);
 			BufferedReader contenido = new BufferedReader(archivo);
 			texto = contenido.readLine();
 			while((texto = contenido.readLine()) != null) {

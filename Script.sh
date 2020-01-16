@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd ..
+
 rm -r "Datos Censo 2017"
 
 wget https://datosabiertos.ine.cl/datasets/187198-microdatos-censo-2017-viviendas.download/
@@ -22,6 +24,8 @@ mv -v Personas.zip "Datos Censo 2017"
 
 mv -v Viviendas.zip "Datos Censo 2017"
 
+cp /home/rcastillo/ProyectoINE_backend/src/main/resources/static/Division_Politica-Chile.csv "/home/rcastillo/Datos Censo 2017/Division_Politica-Chile.csv"
+
 cd Dat*
 
 unzip Hogares.zip
@@ -38,8 +42,6 @@ rm Viviendas.zip
 
 cd ..
 
-git clone https://github.com/RodrigoCC-dev/ProyectoINE_backend.git
-
 cd Proy*
 
 mvn clean test package
@@ -47,5 +49,9 @@ mvn clean test package
 cd target
 
 sudo cp *.war /opt/tomcat/webapps/Proyecto-INE.war
+
+cd ..
+
+rm -r ProyectoINE_backend
 
 sudo systemctl restart tomcat8

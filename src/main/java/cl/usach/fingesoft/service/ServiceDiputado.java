@@ -6,24 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cl.usach.fingesoft.data.Area;
+import cl.usach.fingesoft.data.Escolaridad;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Distrito;
 import cl.usach.fingesoft.model.Hogar;
 import cl.usach.fingesoft.repository.RepositoryDistrito;
 import cl.usach.fingesoft.repository.RepositoryHogar;
-import cl.usach.fingesoft.repository.RepositoryPersona;
-import cl.usach.fingesoft.repository.RepositoryVivienda;
 
 @Service
 public class ServiceDiputado {
 
-	/**
-	@Autowired
-	private RepositoryPersona repoPersona;
-	
-	@Autowired
-	private RepositoryVivienda repoVivienda;
-	**/
 	@Autowired
 	private RepositoryHogar repoHogar;
 	
@@ -35,6 +27,10 @@ public class ServiceDiputado {
 	
 	@Autowired
 	private Area area;
+	
+	@Autowired
+	private Escolaridad escolaridad;
+	
 	
 	public Distrito getDistrito(int numero) {
 		return repoDistrito.findDistrito(numero);
@@ -48,5 +44,10 @@ public class ServiceDiputado {
 	public Area obtenerAreas(int distrito) {
 		Distrito nuevoDist = repoDistrito.findDistrito(distrito);
 		return area.calcularAreaPorComunas(nuevoDist.getListaComunas());
+	}
+	
+	public Escolaridad obtenerEscolaridad(int distrito) {
+		Distrito nuevoDist = repoDistrito.findDistrito(distrito);
+		return escolaridad.calcuarEscolaridadPorComunas(nuevoDist.getListaComunas());
 	}
 }

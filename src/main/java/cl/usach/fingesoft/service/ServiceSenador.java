@@ -6,24 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cl.usach.fingesoft.data.Area;
+import cl.usach.fingesoft.data.Escolaridad;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Circunscripcion;
 import cl.usach.fingesoft.model.Hogar;
 import cl.usach.fingesoft.repository.RepositoryCircunscripcion;
 import cl.usach.fingesoft.repository.RepositoryHogar;
-import cl.usach.fingesoft.repository.RepositoryPersona;
-import cl.usach.fingesoft.repository.RepositoryVivienda;
 
 @Service
 public class ServiceSenador {
 
-	/**
-	@Autowired
-	private RepositoryPersona repoPersona;
-	
-	@Autowired
-	private RepositoryVivienda repoVivienda;
-	**/
 	@Autowired
 	private RepositoryHogar repoHogar;
 	
@@ -35,6 +27,10 @@ public class ServiceSenador {
 	
 	@Autowired
 	private Area area;
+	
+	@Autowired
+	private Escolaridad escolaridad;
+	
 	
 	public Circunscripcion getCircunscripcion(int numero) {
 		return repoCircunscripcion.findCircunscripcion(numero);
@@ -48,5 +44,10 @@ public class ServiceSenador {
 	public Area obtenerAreas(int numero) {
 		Circunscripcion nuevaCircuns = repoCircunscripcion.findCircunscripcion(numero);
 		return area.calcularAreaPorComunas(nuevaCircuns.getListaComunas());
+	}
+	
+	public Escolaridad obtenerEscolaridad(int numero) {
+		Circunscripcion nuevaCircuns = repoCircunscripcion.findCircunscripcion(numero);
+		return escolaridad.calcuarEscolaridadPorComunas(nuevaCircuns.getListaComunas());
 	}
 }
