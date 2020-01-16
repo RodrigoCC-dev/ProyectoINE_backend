@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cl.usach.fingesoft.data.Area;
 import cl.usach.fingesoft.data.Escolaridad;
+import cl.usach.fingesoft.data.GrupoEtario;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Comuna;
 import cl.usach.fingesoft.model.Hogar;
@@ -63,6 +64,19 @@ public class AlcaldeController {
 		String comuna = body.get("Comuna");
 		String localidad = body.get("Localidad");
 		return serviceAlcalde.obtenerAreasXsector(comuna, localidad);
+	}
+	
+	@PostMapping("/grupos/comuna")
+	public GrupoEtario obtenerGrupos(@RequestBody Map<String,String> body) {
+		String comuna = body.get("Comuna");
+		return serviceAlcalde.obtenerGrupos(comuna);
+	}
+	
+	@PostMapping("/grupos/localidad")
+	public GrupoEtario obtenerGruposXsector(@RequestBody Map<String,String> body) {
+		String comuna = body.get("Comuna");
+		String localidad = body.get("Localidad");
+		return serviceAlcalde.obtenerGruposXsector(comuna, localidad);
 	}
 	
 	@PostMapping("/escolaridad/comuna")

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import cl.usach.fingesoft.data.Area;
 import cl.usach.fingesoft.data.Escolaridad;
+import cl.usach.fingesoft.data.GrupoEtario;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Hogar;
 import cl.usach.fingesoft.model.Provincia;
@@ -32,6 +33,9 @@ public class ServiceGore {
 	
 	@Autowired
 	private Area area;
+	
+	@Autowired
+	private GrupoEtario grupo;
 	
 	@Autowired
 	private Escolaridad escolaridad;
@@ -71,13 +75,25 @@ public class ServiceGore {
 		return area.calcularAreaPorComunas(nuevaProv.getListaComunas());
 	}
 	
+	public GrupoEtario obtenerGrupos(String region) {
+		Region nuevaReg = repoRegion.findDatos(region);
+		nuevaReg = repoRegion.findProvincias(nuevaReg);
+		return grupo.calcularGruposPorProvincias(nuevaReg.getListaProvincias());
+	}
+	
+	public GrupoEtario obtenerGruposXprovincia(String provincia) {
+		Provincia nuevaProv = repoProvincia.findDatos(provincia);
+		nuevaProv = repoProvincia.findComunas(nuevaProv);
+		return grupo.calcularGruposPorComunas(nuevaProv.getListaComunas());
+	}
+	
 	public Escolaridad obtenerEscolaridad(String region) {
 		Region nuevaReg = repoRegion.findDatos(region);
 		nuevaReg = repoRegion.findProvincias(nuevaReg);
 		return escolaridad.calcularEscolaridadPorProvincias(nuevaReg.getListaProvincias());
 	}
 	
-	public Escolaridad obtenerEscolaridadXsector(String provincia) {
+	public Escolaridad obtenerEscolaridadXprovincia(String provincia) {
 		Provincia nuevaProv = repoProvincia.findDatos(provincia);
 		nuevaProv = repoProvincia.findComunas(nuevaProv);
 		return escolaridad.calcuarEscolaridadPorComunas(nuevaProv.getListaComunas());

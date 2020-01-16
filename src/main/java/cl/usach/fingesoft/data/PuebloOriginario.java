@@ -1,6 +1,6 @@
 package cl.usach.fingesoft.data;
 
-public class PueblosOriginarios {
+public class PuebloOriginario {
 
 	private double mapuche;
 	private double aymara;

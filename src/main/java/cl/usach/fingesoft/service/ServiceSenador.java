@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import cl.usach.fingesoft.data.Area;
 import cl.usach.fingesoft.data.Escolaridad;
+import cl.usach.fingesoft.data.GrupoEtario;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Circunscripcion;
 import cl.usach.fingesoft.model.Hogar;
@@ -29,6 +30,9 @@ public class ServiceSenador {
 	private Area area;
 	
 	@Autowired
+	private GrupoEtario grupo;
+	
+	@Autowired
 	private Escolaridad escolaridad;
 	
 	
@@ -44,6 +48,11 @@ public class ServiceSenador {
 	public Area obtenerAreas(int numero) {
 		Circunscripcion nuevaCircuns = repoCircunscripcion.findCircunscripcion(numero);
 		return area.calcularAreaPorComunas(nuevaCircuns.getListaComunas());
+	}
+	
+	public GrupoEtario obtenerGrupos(int numero) {
+		Circunscripcion nuevaCircuns = repoCircunscripcion.findCircunscripcion(numero);
+		return grupo.calcularGruposPorComunas(nuevaCircuns.getListaComunas());
 	}
 	
 	public Escolaridad obtenerEscolaridad(int numero) {
