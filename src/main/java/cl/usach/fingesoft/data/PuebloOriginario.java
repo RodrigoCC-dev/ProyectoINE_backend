@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import cl.usach.fingesoft.model.Comuna;
 import cl.usach.fingesoft.model.Persona;
 import cl.usach.fingesoft.model.Provincia;
 import cl.usach.fingesoft.repository.RepositoryPersona;
 
+@Component
 public class PuebloOriginario {
 
 	private double mapuche;
