@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import cl.usach.fingesoft.data.Area;
 import cl.usach.fingesoft.data.Escolaridad;
 import cl.usach.fingesoft.data.GrupoEtario;
+import cl.usach.fingesoft.data.PuebloOriginario;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Provincia;
 import cl.usach.fingesoft.model.Region;
@@ -59,6 +60,18 @@ public class GoreController {
 	public Area obtenerAreasXprovincia(@RequestBody Map<String,String> body) {
 		String nombre = body.get("Provincia");
 		return serviceGore.obtenerAreasXprovincia(nombre);
+	}
+	
+	@PostMapping("/pueblos/region")
+	public PuebloOriginario obtenerPueblos(@RequestBody Map<String,String> body) {
+		String nombre = body.get("Region");
+		return serviceGore.obtenerPueblos(nombre);
+	}
+	
+	@PostMapping("/pueblos/provincia")
+	public PuebloOriginario obtenerPueblosXprovincia(@RequestBody Map<String,String> body) {
+		String nombre = body.get("Provincia");
+		return serviceGore.obtenerPueblosXprovincia(nombre);
 	}
 	
 	@PostMapping("/grupos/region")

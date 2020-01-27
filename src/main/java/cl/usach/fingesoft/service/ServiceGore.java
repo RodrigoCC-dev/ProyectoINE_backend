@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import cl.usach.fingesoft.data.Area;
 import cl.usach.fingesoft.data.Escolaridad;
 import cl.usach.fingesoft.data.GrupoEtario;
+import cl.usach.fingesoft.data.PuebloOriginario;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Hogar;
 import cl.usach.fingesoft.model.Provincia;
@@ -33,6 +34,9 @@ public class ServiceGore {
 	
 	@Autowired
 	private Area area;
+	
+	@Autowired
+	private PuebloOriginario pueblo;
 	
 	@Autowired
 	private GrupoEtario grupo;
@@ -73,6 +77,18 @@ public class ServiceGore {
 		Provincia nuevaProv = repoProvincia.findDatos(provincia);
 		nuevaProv = repoProvincia.findComunas(nuevaProv);
 		return area.calcularAreaPorComunas(nuevaProv.getListaComunas());
+	}
+	
+	public PuebloOriginario obtenerPueblos(String region) {
+		Region nuevaReg = repoRegion.findDatos(region);
+		nuevaReg = repoRegion.findProvincias(nuevaReg);
+		return pueblo.calcularPueblosPorProvincias(nuevaReg.getListaProvincias());
+	}
+	
+	public PuebloOriginario obtenerPueblosXprovincia(String provincia) {
+		Provincia nuevaProv = repoProvincia.findDatos(provincia);
+		nuevaProv = repoProvincia.findComunas(nuevaProv);
+		return pueblo.calcularPueblosPorComunas(nuevaProv.getListaComunas());
 	}
 	
 	public GrupoEtario obtenerGrupos(String region) {
