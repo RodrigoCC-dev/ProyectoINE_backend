@@ -75,7 +75,7 @@ public class GrupoEtario {
 	}
 	
 	public List<Double> registrosPorLocalidad(String comuna, String localidad){
-		return this.registrosPorLocalidad(comuna, localidad);
+		return this.registrosPorListaPersonas(repoPersona.findByLocalidad(comuna, localidad));
 	}
 	
 	public GrupoEtario calcularGruposPorComuna(String comuna) {
