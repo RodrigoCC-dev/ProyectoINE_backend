@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import cl.usach.fingesoft.data.Area;
 import cl.usach.fingesoft.data.Escolaridad;
 import cl.usach.fingesoft.data.GrupoEtario;
+import cl.usach.fingesoft.data.PaisProcedencia;
 import cl.usach.fingesoft.data.PuebloOriginario;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Distrito;
@@ -53,6 +54,12 @@ public class DiputadoController {
 	public GrupoEtario obtenerGrupos(@RequestBody Map<String,String> body) {
 		String numero = body.get("Distrito");
 		return serviceDiputado.obtenerGrupos(Integer.parseInt(numero));
+	}
+	
+	@PostMapping("/paises/distrito")
+	public PaisProcedencia obtenerPaises(@RequestBody Map<String,String> body) {
+		String numero = body.get("Distrito");
+		return serviceDiputado.obtenerPaises(Integer.parseInt(numero));
 	}
 	
 	@PostMapping("/escolaridad/distrito")

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import cl.usach.fingesoft.data.Area;
 import cl.usach.fingesoft.data.Escolaridad;
 import cl.usach.fingesoft.data.GrupoEtario;
+import cl.usach.fingesoft.data.PaisProcedencia;
 import cl.usach.fingesoft.data.PuebloOriginario;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Comuna;
@@ -91,6 +92,19 @@ public class AlcaldeController {
 		String comuna = body.get("Comuna");
 		String localidad = body.get("Localidad");
 		return serviceAlcalde.obtenerGruposXsector(comuna, localidad);
+	}
+	
+	@PostMapping("/paises/comuna")
+	public PaisProcedencia obtenerPaises(@RequestBody Map<String,String> body) {
+		String comuna = body.get("Comuna");
+		return serviceAlcalde.obtenerPaises(comuna);
+	}
+	
+	@PostMapping("/paises/localidad")
+	public PaisProcedencia obtenerPaisesXsector(@RequestBody Map<String,String> body) {
+		String comuna = body.get("Comuna");
+		String localidad = body.get("Localidad");
+		return serviceAlcalde.obtenerPaisesXsector(comuna, localidad);
 	}
 	
 	@PostMapping("/escolaridad/comuna")

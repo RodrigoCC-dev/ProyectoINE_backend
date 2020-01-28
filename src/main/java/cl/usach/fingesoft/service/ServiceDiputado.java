@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import cl.usach.fingesoft.data.Area;
 import cl.usach.fingesoft.data.Escolaridad;
 import cl.usach.fingesoft.data.GrupoEtario;
+import cl.usach.fingesoft.data.PaisProcedencia;
 import cl.usach.fingesoft.data.PuebloOriginario;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Distrito;
@@ -37,6 +38,9 @@ public class ServiceDiputado {
 	private GrupoEtario grupo;
 	
 	@Autowired
+	private PaisProcedencia pais;
+	
+	@Autowired
 	private Escolaridad escolaridad;
 	
 	
@@ -62,6 +66,11 @@ public class ServiceDiputado {
 	public GrupoEtario obtenerGrupos(int distrito) {
 		Distrito nuevoDist = repoDistrito.findDistrito(distrito);
 		return grupo.calcularGruposPorComunas(nuevoDist.getListaComunas());
+	}
+	
+	public PaisProcedencia obtenerPaises(int distrito) {
+		Distrito nuevoDist = repoDistrito.findDistrito(distrito);
+		return pais.calcularPaisPorComunas(nuevoDist.getListaComunas());
 	}
 	
 	public Escolaridad obtenerEscolaridad(int distrito) {
