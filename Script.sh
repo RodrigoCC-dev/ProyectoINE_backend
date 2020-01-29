@@ -1,6 +1,5 @@
 #!/bin/bash
 
-cd ..
 
 rm -r "Datos Censo 2017"
 
@@ -50,7 +49,7 @@ cd target
 
 sudo cp *.war /var/lib/tomcat8/webapps/Proyecto-INE.war
 
-cd ..
+cd ../..
 
 sudo rm -rf ProyectoINE_backend
 
