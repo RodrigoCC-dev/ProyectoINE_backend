@@ -65,6 +65,10 @@ public class ServiceGore {
 		return nueva;
 	}
 	
+	public List<Region> getRegiones(){
+		return repoRegion.findAll();
+	}
+	
 	public TipologiaHogar obtenerTipologia(String region) {
 		List<Hogar> hogares = repoHogar.findByRegion(region);
 		return tipoHogar.calcularTipologia(hogares);

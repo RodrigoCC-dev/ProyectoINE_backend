@@ -1,9 +1,11 @@
 package cl.usach.fingesoft.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,6 +40,11 @@ public class GoreController {
 	public Region getDatosRegion(@RequestBody Map<String,String> body) {
 		String nombre = body.get("Region");
 		return serviceGore.getRegionByNombre(nombre);
+	}
+	
+	@GetMapping("/listar/regiones")
+	public List<Region> getRegiones(){
+		return serviceGore.getRegiones();
 	}
 	
 	@PostMapping("/tipologia/region")

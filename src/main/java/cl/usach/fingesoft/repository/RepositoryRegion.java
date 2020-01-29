@@ -108,5 +108,30 @@ public class RepositoryRegion {
 		return region;
 	}
 	
+	
+	public List<Region> findAll(){
+		String nombreArchivo = "Microdato_Censo2017-Regiones.csv";
+		String texto = "";
+		String[] info;
+		List<Region> regiones = new ArrayList<>();
+		try {
+			FileReader archivo = new FileReader(repoArchivos.getRutaPrincipal() + repoArchivos.getRutaGeografica() + nombreArchivo);
+			BufferedReader contenido = new BufferedReader(archivo);
+			texto = contenido.readLine();
+			while((texto = contenido.readLine()) != null) {
+				info = texto.split(";");
+				Region nuevaReg = new Region();
+				nuevaReg.setNumero(Integer.parseInt(info[0]));
+				nuevaReg.setNombre(info[1]);
+				nuevaReg = this.findProvincias(nuevaReg);
+				regiones.add(nuevaReg);
+			}
+			contenido.close();
+		}
+		catch (Exception e) {
+			LOG.error("Error E4 al abrir el archivo " + nombreArchivo);
+		}
+		return regiones;
+	}
 }
 
