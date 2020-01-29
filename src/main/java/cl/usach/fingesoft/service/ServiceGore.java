@@ -6,30 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cl.usach.fingesoft.data.Area;
+import cl.usach.fingesoft.data.Escolaridad;
+import cl.usach.fingesoft.data.GrupoEtario;
+import cl.usach.fingesoft.data.PaisProcedencia;
+import cl.usach.fingesoft.data.PiramidePoblacional;
+import cl.usach.fingesoft.data.PuebloOriginario;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Hogar;
 import cl.usach.fingesoft.model.Provincia;
 import cl.usach.fingesoft.model.Region;
 import cl.usach.fingesoft.repository.RepositoryHogar;
-import cl.usach.fingesoft.repository.RepositoryPersona;
 import cl.usach.fingesoft.repository.RepositoryProvincia;
 import cl.usach.fingesoft.repository.RepositoryRegion;
-import cl.usach.fingesoft.repository.RepositoryRegion;
-import cl.usach.fingesoft.repository.RepositoryVivienda;
 
 @Service
 public class ServiceGore {
 	
-	/**
-	@Autowired
-	private RepositoryPersona repoPersona;
-	
-	@Autowired
-	private RepositoryVivienda repoVivienda;
-	
-	@Autowired
-	private RepositoryHogar repoHogar;
-	**/
 	@Autowired
 	private RepositoryRegion repoRegion;
 	
@@ -45,6 +37,21 @@ public class ServiceGore {
 	@Autowired
 	private Area area;
 	
+	@Autowired
+	private PuebloOriginario pueblo;
+	
+	@Autowired
+	private GrupoEtario grupo;
+	
+	@Autowired
+	private PaisProcedencia pais;
+	
+	@Autowired
+	private Escolaridad escolaridad;
+	
+	@Autowired
+	private PiramidePoblacional piramide;
+	
 	
 	public Provincia getProvinciaByNombre(String nombre) {
 		Provincia nueva = repoProvincia.findDatos(nombre);
@@ -56,6 +63,10 @@ public class ServiceGore {
 		Region nueva = repoRegion.findDatos(nombre);
 		nueva = repoRegion.findProvincias(nueva);
 		return nueva;
+	}
+	
+	public List<Region> getRegiones(){
+		return repoRegion.findAll();
 	}
 	
 	public TipologiaHogar obtenerTipologia(String region) {
@@ -78,5 +89,92 @@ public class ServiceGore {
 		Provincia nuevaProv = repoProvincia.findDatos(provincia);
 		nuevaProv = repoProvincia.findComunas(nuevaProv);
 		return area.calcularAreaPorComunas(nuevaProv.getListaComunas());
+	}
+	
+	public PuebloOriginario obtenerPueblos(String region) {
+		Region nuevaReg = repoRegion.findDatos(region);
+		nuevaReg = repoRegion.findProvincias(nuevaReg);
+		return pueblo.calcularPueblosPorProvincias(nuevaReg.getListaProvincias());
+	}
+	
+	public PuebloOriginario obtenerPueblosXprovincia(String provincia) {
+		Provincia nuevaProv = repoProvincia.findDatos(provincia);
+		nuevaProv = repoProvincia.findComunas(nuevaProv);
+		return pueblo.calcularPueblosPorComunas(nuevaProv.getListaComunas());
+	}
+	
+	public GrupoEtario obtenerGrupos(String region) {
+		Region nuevaReg = repoRegion.findDatos(region);
+		nuevaReg = repoRegion.findProvincias(nuevaReg);
+		return grupo.calcularGruposPorProvincias(nuevaReg.getListaProvincias());
+	}
+	
+	public GrupoEtario obtenerGruposXprovincia(String provincia) {
+		Provincia nuevaProv = repoProvincia.findDatos(provincia);
+		nuevaProv = repoProvincia.findComunas(nuevaProv);
+		return grupo.calcularGruposPorComunas(nuevaProv.getListaComunas());
+	}
+	
+	public PaisProcedencia obtenerPaises(String region) {
+		Region nuevaReg = repoRegion.findDatos(region);
+		nuevaReg = repoRegion.findProvincias(nuevaReg);
+		return pais.calcularPaisPorProvincias(nuevaReg.getListaProvincias());
+	}
+	
+	public PaisProcedencia obtenerPaisesXprovincia(String provincia) {
+		Provincia nuevaProv = repoProvincia.findDatos(provincia);
+		nuevaProv = repoProvincia.findComunas(nuevaProv);
+		return pais.calcularPaisPorComunas(nuevaProv.getListaComunas());
+	}
+	
+	public Escolaridad obtenerEscolaridad(String region) {
+		Region nuevaReg = repoRegion.findDatos(region);
+		nuevaReg = repoRegion.findProvincias(nuevaReg);
+		return escolaridad.calcularEscolaridadPorProvincias(nuevaReg.getListaProvincias());
+	}
+	
+	public Escolaridad obtenerEscolaridadXprovincia(String provincia) {
+		Provincia nuevaProv = repoProvincia.findDatos(provincia);
+		nuevaProv = repoProvincia.findComunas(nuevaProv);
+		return escolaridad.calcuarEscolaridadPorComunas(nuevaProv.getListaComunas());
+	}
+	
+	public PiramidePoblacional obtenerPiramide(String region) {
+		Region nuevaReg = repoRegion.findDatos(region);
+		nuevaReg = repoRegion.findProvincias(nuevaReg);
+		return piramide.calcularPiramidePorProvincias(nuevaReg.getListaProvincias());
+	}
+	
+	public PiramidePoblacional obtenerPiramideXprovincia(String provincia) {
+		Provincia nuevaProv = repoProvincia.findDatos(provincia);
+		nuevaProv = repoProvincia.findComunas(nuevaProv);
+		return piramide.calcularPiramidePorComunas(nuevaProv.getListaComunas());
+	}
+	
+	//TEST//
+	//Pruebas de métodos Data a nivel pais//
+	
+	public Area obtenerAreaPais() {
+		return area.calcularAreaPorRegiones(repoRegion.findAll());
+	}
+	
+	public PuebloOriginario obtenerPueblosPais() {
+		return pueblo.calcularPueblosPorRegiones(repoRegion.findAll());
+	}
+	
+	public GrupoEtario obtenerGrupoPais() {
+		return grupo.calcularGruposPorRegiones(repoRegion.findAll());
+	}
+	
+	public PaisProcedencia obtenerPaisesPais() {
+		return pais.calcularPaisPorRegiones(repoRegion.findAll());
+	}
+	
+	public Escolaridad obtenerEscolaridadPais() {
+		return escolaridad.calcularEscolaridadPorRegiones(repoRegion.findAll());
+	}
+	
+	public PiramidePoblacional obtenerPiramidePais() {
+		return piramide.calcularPiramidePorRegiones(repoRegion.findAll());
 	}
 }

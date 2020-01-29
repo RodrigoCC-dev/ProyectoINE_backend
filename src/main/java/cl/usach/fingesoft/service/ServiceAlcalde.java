@@ -6,6 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cl.usach.fingesoft.data.Area;
+import cl.usach.fingesoft.data.Escolaridad;
+import cl.usach.fingesoft.data.GrupoEtario;
+import cl.usach.fingesoft.data.PaisProcedencia;
+import cl.usach.fingesoft.data.PiramidePoblacional;
+import cl.usach.fingesoft.data.PuebloOriginario;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Comuna;
 import cl.usach.fingesoft.model.Hogar;
@@ -31,6 +36,21 @@ public class ServiceAlcalde {
 	
 	@Autowired
 	private Area area;
+	
+	@Autowired
+	private PuebloOriginario pueblo;
+	
+	@Autowired
+	public GrupoEtario grupo;
+	
+	@Autowired
+	public PaisProcedencia pais;
+	
+	@Autowired
+	private Escolaridad escolaridad;
+	
+	@Autowired
+	private PiramidePoblacional piramide;
 	
 	
 	public Comuna getComunaByNombre(String nombre) {
@@ -61,6 +81,46 @@ public class ServiceAlcalde {
 	
 	public Area obtenerAreasXsector(String comuna, String localidad) {
 		return area.calcularAreaPorLocalidad(comuna, localidad);
+	}
+	
+	public PuebloOriginario obtenerPueblos(String comuna) {
+		return pueblo.calcularPueblosPorComuna(comuna);
+	}
+	
+	public PuebloOriginario obtenerPueblosXsector(String comuna, String localidad) {
+		return pueblo.calcularPueblosPorLocalidad(comuna, localidad);
+	}
+	
+	public GrupoEtario obtenerGrupos(String comuna) {
+		return grupo.calcularGruposPorComuna(comuna);
+	}
+	
+	public GrupoEtario obtenerGruposXsector(String comuna, String localidad) {
+		return grupo.calcularGruposPorLocalidad(comuna, localidad);
+	}
+	
+	public PaisProcedencia obtenerPaises(String comuna) {
+		return pais.calcularPaisPorComuna(comuna);
+	}
+	
+	public PaisProcedencia obtenerPaisesXsector(String comuna, String localidad) {
+		return pais.calcularPaisPorLocalidad(comuna, localidad);
+	}
+	
+	public Escolaridad obtenerEscolaridad(String comuna) {
+		return escolaridad.calcularEscolaridadPorComuna(comuna);
+	}
+	
+	public Escolaridad obtenerEscolaridadXsector(String comuna, String localidad) {
+		return escolaridad.calcularEscolaridadPorLocalidad(comuna, localidad);
+	}
+	
+	public PiramidePoblacional obtenerPiramide(String comuna) {
+		return piramide.calcularPiramidePorComuna(comuna);
+	}
+	
+	public PiramidePoblacional obtenerPiramideXsector(String comuna, String localidad) {
+		return piramide.calcularPiramidePorLocalidad(comuna, localidad);
 	}
 	
 	
