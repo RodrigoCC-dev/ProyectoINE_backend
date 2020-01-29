@@ -48,10 +48,10 @@ mvn clean test package
 
 cd target
 
-sudo cp *.war /opt/tomcat/webapps/Proyecto-INE.war
+sudo cp *.war /var/lib/tomcat8/webapps/Proyecto-INE.war
 
 cd ..
 
-rm -r ProyectoINE_backend
+sudo rm -rf ProyectoINE_backend
 
-sudo systemctl restart tomcat8
+sudo service tomcat8 restart
