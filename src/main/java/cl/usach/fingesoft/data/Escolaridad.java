@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import cl.usach.fingesoft.model.Comuna;
 import cl.usach.fingesoft.model.Persona;
 import cl.usach.fingesoft.model.Provincia;
+import cl.usach.fingesoft.model.Region;
 import cl.usach.fingesoft.repository.RepositoryPersona;
 
 @Component
@@ -176,6 +177,34 @@ public class Escolaridad {
 		datos.setMasDe15((totales.get(1) / totales.get(4)) * 100);
 		datos.setMasDe19((totales.get(2) / totales.get(4)) * 100);
 		datos.setMasDe25((totales.get(3) / totales.get(4)) * 100);
+		return datos;
+	}
+	
+	
+	public Escolaridad calcularEscolaridadPorRegiones(List<Region> listaRegiones) {
+		List<Double> parciales;
+		Escolaridad datos = new Escolaridad();
+		double cincoOmas = 0;
+		double quinceOmas = 0;
+		double diecinueveOmas = 0;
+		double veinticincoOmas = 0;
+		double total = 0;
+		for(int i = 0; i < listaRegiones.size(); i++) {
+			for(int j = 0; j < listaRegiones.get(i).getListaProvincias().size(); j++) {
+				for(int k = 0; k < listaRegiones.get(i).getListaProvincias().get(j).getListaComunas().size(); k++) {
+					parciales = this.registrosPorComuna(listaRegiones.get(i).getListaProvincias().get(j).getListaComunas().get(k).getNombre());
+					cincoOmas = cincoOmas + parciales.get(0);
+					quinceOmas = quinceOmas + parciales.get(1);
+					diecinueveOmas = diecinueveOmas + parciales.get(2);
+					veinticincoOmas = veinticincoOmas + parciales.get(3);
+					total = total + parciales.get(4);
+				}
+			}
+		}
+		datos.setMasDe5((cincoOmas / total) * 100);
+		datos.setMasDe15((quinceOmas / total) * 100);
+		datos.setMasDe19((diecinueveOmas / total) * 100);
+		datos.setMasDe25((veinticincoOmas / total) * 100);
 		return datos;
 	}
 }

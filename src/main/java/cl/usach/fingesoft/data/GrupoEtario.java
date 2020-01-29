@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import cl.usach.fingesoft.model.Comuna;
 import cl.usach.fingesoft.model.Persona;
 import cl.usach.fingesoft.model.Provincia;
+import cl.usach.fingesoft.model.Region;
 import cl.usach.fingesoft.repository.RepositoryPersona;
 
 @Component
@@ -130,6 +131,30 @@ public class GrupoEtario {
 				entre15y65 = entre15y65 + parciales.get(1);
 				masDe65 = masDe65 + parciales.get(2);
 				total = total + parciales.get(3);
+			}
+		}
+		grupo.setMenoresA15((menoresA15 / total) * 100);
+		grupo.setEntre15y65((entre15y65 / total) * 100);
+		grupo.setMasDe65((masDe65 / total) * 100);
+		return grupo;
+	}
+	
+	public GrupoEtario calcularGruposPorRegiones(List<Region> listaRegiones) {
+		GrupoEtario grupo = new GrupoEtario();
+		List<Double> parciales;
+		double menoresA15 = 0;
+		double entre15y65 = 0;
+		double masDe65 = 0;
+		double total = 0;
+		for(int i = 0; i < listaRegiones.size(); i++) {
+			for(int j = 0; j < listaRegiones.get(i).getListaProvincias().size(); j++) {
+				for(int k = 0; k < listaRegiones.get(i).getListaProvincias().get(j).getListaComunas().size(); k++) {
+					parciales = this.registrosPorComuna(listaRegiones.get(i).getListaProvincias().get(j).getListaComunas().get(k).getNombre());
+					menoresA15 = menoresA15 + parciales.get(0);
+					entre15y65 = entre15y65 + parciales.get(1);
+					masDe65 = masDe65 + parciales.get(2);
+					total = total + parciales.get(3);
+				}
 			}
 		}
 		grupo.setMenoresA15((menoresA15 / total) * 100);

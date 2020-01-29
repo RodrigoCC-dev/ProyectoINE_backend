@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import cl.usach.fingesoft.model.Comuna;
 import cl.usach.fingesoft.model.Persona;
 import cl.usach.fingesoft.model.Provincia;
+import cl.usach.fingesoft.model.Region;
 import cl.usach.fingesoft.repository.RepositoryPersona;
 
 @Component
@@ -252,6 +253,48 @@ public class PaisProcedencia {
 				otro = otro + parciales.get(7);
 				ignorado = ignorado + parciales.get(8);
 				total = total + parciales.get(9);
+			}
+		}
+		pais.setPeru((peru / total) * 100);
+		pais.setColombia((colombia / total) * 100);
+		pais.setArgentina((argentina / total) * 100);
+		pais.setBolivia((bolivia / total) * 100);
+		pais.setVenezuela((venezuela / total) * 100);
+		pais.setHaiti((haiti / total) * 100);
+		pais.setEcuador((ecuador / total) * 100);
+		pais.setOtro((otro / total) * 100);
+		pais.setIgnorado((ignorado / total) * 100);
+		return pais;
+	}
+	
+	public PaisProcedencia calcularPaisPorRegiones(List<Region> listaRegiones) {
+		PaisProcedencia pais = new PaisProcedencia();
+		List<Double> parciales;
+		double peru = 0;
+		double colombia = 0;
+		double argentina = 0;
+		double bolivia = 0;
+		double venezuela = 0;
+		double haiti = 0;
+		double ecuador = 0;
+		double otro = 0;
+		double ignorado = 0;
+		double total = 0;
+		for(int i = 0; i < listaRegiones.size(); i++) {
+			for(int j = 0; j < listaRegiones.get(i).getListaProvincias().size(); j++) {
+				for(int k = 0; k < listaRegiones.get(i).getListaProvincias().get(j).getListaComunas().size(); k++) {
+					parciales = this.registrosPorComuna(listaRegiones.get(i).getListaProvincias().get(j).getListaComunas().get(k).getNombre());
+					peru = peru + parciales.get(0);
+					colombia = colombia + parciales.get(1);
+					argentina = argentina + parciales.get(2);
+					bolivia = bolivia + parciales.get(3);
+					venezuela = venezuela + parciales.get(4);
+					haiti = haiti + parciales.get(5);
+					ecuador = ecuador + parciales.get(6);
+					otro = otro + parciales.get(7);
+					ignorado = ignorado + parciales.get(8);
+					total = total + parciales.get(9);
+				}
 			}
 		}
 		pais.setPeru((peru / total) * 100);

@@ -150,4 +150,31 @@ public class ServiceGore {
 		nuevaProv = repoProvincia.findComunas(nuevaProv);
 		return piramide.calcularPiramidePorComunas(nuevaProv.getListaComunas());
 	}
+	
+	//TEST//
+	//Pruebas de métodos Data a nivel pais//
+	
+	public Area obtenerAreaPais() {
+		return area.calcularAreaPorRegiones(repoRegion.findAll());
+	}
+	
+	public PuebloOriginario obtenerPueblosPais() {
+		return pueblo.calcularPueblosPorRegiones(repoRegion.findAll());
+	}
+	
+	public GrupoEtario obtenerGrupoPais() {
+		return grupo.calcularGruposPorRegiones(repoRegion.findAll());
+	}
+	
+	public PaisProcedencia obtenerPaisesPais() {
+		return pais.calcularPaisPorRegiones(repoRegion.findAll());
+	}
+	
+	public Escolaridad obtenerEscolaridadPais() {
+		return escolaridad.calcularEscolaridadPorRegiones(repoRegion.findAll());
+	}
+	
+	public PiramidePoblacional obtenerPiramidePais() {
+		return piramide.calcularPiramidePorRegiones(repoRegion.findAll());
+	}
 }

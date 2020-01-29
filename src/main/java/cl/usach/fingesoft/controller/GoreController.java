@@ -130,4 +130,35 @@ public class GoreController {
 		String nombre = body.get("Provincia");
 		return serviceGore.obtenerPiramideXprovincia(nombre);
 	}
+	
+	//Test//
+	@GetMapping("/test/areas")
+	public Area obtenerAreasPais() {
+		return serviceGore.obtenerAreaPais();
+	}
+	
+	@GetMapping("/test/pueblos")
+	public PuebloOriginario obtenerPueblosPais() {
+		return serviceGore.obtenerPueblosPais();
+	}
+	
+	@GetMapping("/test/grupos")
+	public GrupoEtario obtenerGruposPais() {
+		return serviceGore.obtenerGrupoPais();
+	}
+	
+	@GetMapping("/test/paises")
+	public PaisProcedencia obtenerPaisesPais() {
+		return serviceGore.obtenerPaisesPais();
+	}
+	
+	@GetMapping("/test/escolaridad")
+	public Escolaridad obtenerEscolaridadPais() {
+		return serviceGore.obtenerEscolaridadPais();
+	}
+	
+	@GetMapping("/test/piramide")
+	public PiramidePoblacional obtenerPiramidePais() {
+		return serviceGore.obtenerPiramidePais();
+	}
 }

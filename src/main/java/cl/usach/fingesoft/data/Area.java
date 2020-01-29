@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import cl.usach.fingesoft.model.Comuna;
 import cl.usach.fingesoft.model.Persona;
 import cl.usach.fingesoft.model.Provincia;
+import cl.usach.fingesoft.model.Region;
 import cl.usach.fingesoft.repository.RepositoryPersona;
 
 @Component
@@ -113,6 +114,27 @@ public class Area {
 				urbano = urbano + parciales.get(0);
 				rural = rural + parciales.get(1);
 				total = total + parciales.get(2);
+			}
+		}
+		distribucion.setUrbana((urbano / total) * 100);
+		distribucion.setRural((rural / total) * 100);
+		return distribucion;
+	}
+	
+	public Area calcularAreaPorRegiones(List<Region> regiones) {
+		Area distribucion = new Area();
+		List<Double> parciales;
+		double total = 0;
+		double urbano = 0;
+		double rural = 0;
+		for(int i = 0; i < regiones.size(); i++) {
+			for(int j = 0; j < regiones.get(i).getListaProvincias().size(); j++) {
+				for(int k = 0; k < regiones.get(i).getListaProvincias().get(j).getListaComunas().size(); k++) {
+					parciales = this.registrosPorComuna(regiones.get(i).getListaProvincias().get(j).getListaComunas().get(k).getNombre());
+					urbano = urbano + parciales.get(0);
+					rural = rural + parciales.get(1);
+					total = total + parciales.get(2);
+				}
 			}
 		}
 		distribucion.setUrbana((urbano / total) * 100);

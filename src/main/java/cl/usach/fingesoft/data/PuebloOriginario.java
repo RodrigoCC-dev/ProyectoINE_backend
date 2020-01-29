@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import cl.usach.fingesoft.model.Comuna;
 import cl.usach.fingesoft.model.Persona;
 import cl.usach.fingesoft.model.Provincia;
+import cl.usach.fingesoft.model.Region;
 import cl.usach.fingesoft.repository.RepositoryPersona;
 
 @Component
@@ -298,6 +299,55 @@ public class PuebloOriginario {
 				otro = otro + parciales.get(9);
 				ignorado = ignorado + parciales.get(10);
 				total = total + parciales.get(11);
+			}
+		}
+		pueblos.setMapuche((mapuche / total) * 100);
+		pueblos.setAymara((aymara / total) * 100);
+		pueblos.setRapaNui((rapaNui / total) * 100);
+		pueblos.setLicanAntai((licanAntai / total) * 100);
+		pueblos.setQuechua((quechua / total) * 100);
+		pueblos.setColla((colla / total) * 100);
+		pueblos.setDiaguita((diaguita / total) * 100);
+		pueblos.setKawesqar((kawesqar / total) * 100);
+		pueblos.setYagan((yagan / total) * 100);
+		pueblos.setOtro((otro / total) * 100);
+		pueblos.setIgnorado((ignorado / total) * 100);
+		return pueblos;
+	}
+	
+	
+	public PuebloOriginario calcularPueblosPorRegiones(List<Region> listaRegiones) {
+		PuebloOriginario pueblos = new PuebloOriginario();
+		List<Double> parciales;
+		double mapuche = 0;
+		double aymara = 0;
+		double rapaNui = 0;
+		double licanAntai = 0;
+		double quechua = 0;
+		double colla = 0;
+		double diaguita = 0;
+		double kawesqar = 0;
+		double yagan = 0;
+		double otro = 0;
+		double ignorado = 0;
+		double total = 0;
+		for(int i = 0; i < listaRegiones.size(); i++) {
+			for(int j = 0; j < listaRegiones.get(i).getListaProvincias().size(); j++) {
+				for(int k = 0; k < listaRegiones.get(i).getListaProvincias().get(j).getListaComunas().size(); k++) {
+					parciales = this.registrosPorComuna(listaRegiones.get(i).getListaProvincias().get(j).getListaComunas().get(k).getNombre());
+					mapuche = mapuche + parciales.get(0);
+					aymara = aymara + parciales.get(1);
+					rapaNui = rapaNui + parciales.get(2);
+					licanAntai = licanAntai + parciales.get(3);
+					quechua = quechua + parciales.get(4);
+					colla = colla + parciales.get(5);
+					diaguita = diaguita + parciales.get(6);
+					kawesqar = kawesqar + parciales.get(7);
+					yagan = yagan + parciales.get(8);
+					otro = otro + parciales.get(9);
+					ignorado = ignorado + parciales.get(10);
+					total = total + parciales.get(11);
+				}
 			}
 		}
 		pueblos.setMapuche((mapuche / total) * 100);
