@@ -68,8 +68,7 @@ public class RepositoryDistrito {
 			while((texto = contenido.readLine()) != null) {
 				info = texto.split(";");
 				if(distritoActual != Integer.parseInt(info[2])) {
-					int numero = Integer.parseInt(info[2]);
-					listaNumeros.add(numero);
+					listaNumeros.add(Integer.parseInt(info[2]));
 					distritoActual = Integer.parseInt(info[2]);
 				}
 			}

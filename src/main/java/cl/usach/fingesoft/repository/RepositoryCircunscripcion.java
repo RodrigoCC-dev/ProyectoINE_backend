@@ -53,5 +53,35 @@ public class RepositoryCircunscripcion {
 		}
 		return nueva;
 	}
+	
+	public List<Circunscripcion> findAll() {
+		List<Circunscripcion> listaCircunscripciones = new ArrayList<>();
+		List<Integer> listaNumeros = new ArrayList<>();
+		String nombreArchivo = "Division_Politica-Chile.csv";
+		String texto = "";
+		String[] info;
+		int circunscripcionActual = 0;
+		try {
+			FileReader archivo = new FileReader(repoArchivos.getRutaPrincipal() + nombreArchivo);
+			BufferedReader contenido = new BufferedReader(archivo);
+			texto = contenido.readLine();
+			while((texto = contenido.readLine()) != null) {
+				info = texto.split(";");
+				if(circunscripcionActual != Integer.parseInt(info[1])) {
+					listaNumeros.add(Integer.parseInt(info[1]));
+					circunscripcionActual = Integer.parseInt(info[1]);
+				}
+			}
+			contenido.close();
+			for(int i = 0; i < listaNumeros.size(); i++) {
+				Circunscripcion nuevaCircuns = this.findCircunscripcion(listaNumeros.get(i));
+				listaCircunscripciones.add(nuevaCircuns);
+			}
+		}
+		catch (Exception e) {
+			LOG.error("Error al abrir el archivo " + nombreArchivo);
+		}
+		return listaCircunscripciones;
+	}
 
 }

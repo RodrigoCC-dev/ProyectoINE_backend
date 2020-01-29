@@ -52,6 +52,10 @@ public class ServiceSenador {
 		return repoCircunscripcion.findCircunscripcion(numero);
 	}
 	
+	public List<Circunscripcion> getCircunscripciones(){
+		return repoCircunscripcion.findAll();
+	}
+	
 	public TipologiaHogar obtenerTipologia(int numero) {
 		List<Hogar> hogares = repoHogar.findByCircunscripcion(numero);
 		return tipoHogar.calcularTipologia(hogares);
