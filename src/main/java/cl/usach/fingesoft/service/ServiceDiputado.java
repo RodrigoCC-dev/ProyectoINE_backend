@@ -52,6 +52,10 @@ public class ServiceDiputado {
 		return repoDistrito.findDistrito(numero);
 	}
 	
+	public List<Distrito> getDistritos(){
+		return repoDistrito.findAll();
+	}
+	
 	public TipologiaHogar obtenerTipologia(int distrito) {
 		List<Hogar> hogares = repoHogar.findByDistrito(distrito);
 		return tipoHogar.calcularTipologia(hogares);

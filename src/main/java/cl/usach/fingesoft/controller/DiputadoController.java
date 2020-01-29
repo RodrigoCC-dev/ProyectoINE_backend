@@ -1,9 +1,11 @@
 package cl.usach.fingesoft.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,6 +33,11 @@ public class DiputadoController {
 	public Distrito getDatosDistrito(@RequestBody Map<String,String> body) {
 		String numero = body.get("Distrito");
 		return serviceDiputado.getDistrito(Integer.parseInt(numero));
+	}
+	
+	@GetMapping("/listar/distritos")
+	public List<Distrito> getDistritos(){
+		return serviceDiputado.getDistritos();
 	}
 	
 	@PostMapping("/tipologia/distrito")

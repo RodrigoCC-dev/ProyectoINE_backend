@@ -30,7 +30,7 @@ public class RepositoryDistrito {
 		String nombreArchivo = "Division_Politica-Chile.csv";
 		String texto = "";
 		String[] info;
-		List<Comuna> comunas = new ArrayList<Comuna>();
+		List<Comuna> comunas = new ArrayList<>();
 		Comuna newComuna = new Comuna();
 		try {
 			FileReader archivo = new FileReader(repoArchivos.getRutaPrincipal() + nombreArchivo);
@@ -52,6 +52,37 @@ public class RepositoryDistrito {
 			LOG.error("Error al abrir el archivo " + nombreArchivo);
 		}
 		return nuevo;
+	}
+	
+	public List<Distrito> findAll(){
+		List<Distrito> listaDistritos = new ArrayList<>();
+		List<Integer> listaNumeros = new ArrayList<>();
+		String nombreArchivo = "Division_Politica-Chile.csv";
+		String texto = "";
+		String[] info;
+		int distritoActual = 0;
+		try {
+			FileReader archivo = new FileReader(repoArchivos.getRutaPrincipal() + nombreArchivo);
+			BufferedReader contenido = new BufferedReader(archivo);
+			texto = contenido.readLine();
+			while((texto = contenido.readLine()) != null) {
+				info = texto.split(";");
+				if(distritoActual != Integer.parseInt(info[2])) {
+					int numero = Integer.parseInt(info[2]);
+					listaNumeros.add(numero);
+					distritoActual = Integer.parseInt(info[2]);
+				}
+			}
+			contenido.close();
+			for(int i = 0; i < listaNumeros.size(); i++) {
+				Distrito distrito = this.findDistrito(listaNumeros.get(i));
+				listaDistritos.add(distrito);
+			}
+		}
+		catch (Exception e) {
+			LOG.error("Error al abrir el archivo " + nombreArchivo);
+		}
+		return listaDistritos;
 	}
 
 }
