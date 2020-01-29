@@ -9,6 +9,7 @@ import cl.usach.fingesoft.data.Area;
 import cl.usach.fingesoft.data.Escolaridad;
 import cl.usach.fingesoft.data.GrupoEtario;
 import cl.usach.fingesoft.data.PaisProcedencia;
+import cl.usach.fingesoft.data.PiramidePoblacional;
 import cl.usach.fingesoft.data.PuebloOriginario;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Comuna;
@@ -47,6 +48,9 @@ public class ServiceAlcalde {
 	
 	@Autowired
 	private Escolaridad escolaridad;
+	
+	@Autowired
+	private PiramidePoblacional piramide;
 	
 	
 	public Comuna getComunaByNombre(String nombre) {
@@ -110,6 +114,15 @@ public class ServiceAlcalde {
 	public Escolaridad obtenerEscolaridadXsector(String comuna, String localidad) {
 		return escolaridad.calcularEscolaridadPorLocalidad(comuna, localidad);
 	}
+	
+	public PiramidePoblacional obtenerPiramide(String comuna) {
+		return piramide.calcularPiramidePorComuna(comuna);
+	}
+	
+	public PiramidePoblacional obtenerPiramideXsector(String comuna, String localidad) {
+		return piramide.calcularPiramidePorLocalidad(comuna, localidad);
+	}
+	
 	
 	//Test//
 	//Para prueba de métodos Repository. Eliminar posteriormente

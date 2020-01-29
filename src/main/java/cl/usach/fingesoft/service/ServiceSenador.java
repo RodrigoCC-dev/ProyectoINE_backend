@@ -9,6 +9,7 @@ import cl.usach.fingesoft.data.Area;
 import cl.usach.fingesoft.data.Escolaridad;
 import cl.usach.fingesoft.data.GrupoEtario;
 import cl.usach.fingesoft.data.PaisProcedencia;
+import cl.usach.fingesoft.data.PiramidePoblacional;
 import cl.usach.fingesoft.data.PuebloOriginario;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Circunscripcion;
@@ -43,6 +44,9 @@ public class ServiceSenador {
 	@Autowired
 	private Escolaridad escolaridad;
 	
+	@Autowired
+	private PiramidePoblacional piramide;
+	
 	
 	public Circunscripcion getCircunscripcion(int numero) {
 		return repoCircunscripcion.findCircunscripcion(numero);
@@ -76,5 +80,10 @@ public class ServiceSenador {
 	public Escolaridad obtenerEscolaridad(int numero) {
 		Circunscripcion nuevaCircuns = repoCircunscripcion.findCircunscripcion(numero);
 		return escolaridad.calcuarEscolaridadPorComunas(nuevaCircuns.getListaComunas());
+	}
+	
+	public PiramidePoblacional obtenerPiramide(int numero) {
+		Circunscripcion nuevaCircuns = repoCircunscripcion.findCircunscripcion(numero);
+		return piramide.calcularPiramidePorComunas(nuevaCircuns.getListaComunas());
 	}
 }

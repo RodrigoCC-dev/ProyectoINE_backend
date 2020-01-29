@@ -9,6 +9,7 @@ import cl.usach.fingesoft.data.Area;
 import cl.usach.fingesoft.data.Escolaridad;
 import cl.usach.fingesoft.data.GrupoEtario;
 import cl.usach.fingesoft.data.PaisProcedencia;
+import cl.usach.fingesoft.data.PiramidePoblacional;
 import cl.usach.fingesoft.data.PuebloOriginario;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Distrito;
@@ -43,6 +44,9 @@ public class ServiceDiputado {
 	@Autowired
 	private Escolaridad escolaridad;
 	
+	@Autowired
+	private PiramidePoblacional piramide;
+	
 	
 	public Distrito getDistrito(int numero) {
 		return repoDistrito.findDistrito(numero);
@@ -76,5 +80,10 @@ public class ServiceDiputado {
 	public Escolaridad obtenerEscolaridad(int distrito) {
 		Distrito nuevoDist = repoDistrito.findDistrito(distrito);
 		return escolaridad.calcuarEscolaridadPorComunas(nuevoDist.getListaComunas());
+	}
+	
+	public PiramidePoblacional obtenerPiramide(int distrito) {
+		Distrito nuevoDist = repoDistrito.findDistrito(distrito);
+		return piramide.calcularPiramidePorComunas(nuevoDist.getListaComunas());
 	}
 }

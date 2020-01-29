@@ -13,6 +13,7 @@ import cl.usach.fingesoft.data.Area;
 import cl.usach.fingesoft.data.Escolaridad;
 import cl.usach.fingesoft.data.GrupoEtario;
 import cl.usach.fingesoft.data.PaisProcedencia;
+import cl.usach.fingesoft.data.PiramidePoblacional;
 import cl.usach.fingesoft.data.PuebloOriginario;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Provincia;
@@ -109,5 +110,17 @@ public class GoreController {
 	public Escolaridad obtenerEscolaridadXprovincia(@RequestBody Map<String,String> body) {
 		String nombre = body.get("Provincia");
 		return serviceGore.obtenerEscolaridadXprovincia(nombre);
+	}
+	
+	@PostMapping("/piramide/region")
+	public PiramidePoblacional obtenerPiramide(@RequestBody Map<String,String> body) {
+		String nombre = body.get("Region");
+		return serviceGore.obtenerPiramide(nombre);
+	}
+	
+	@PostMapping("/piramide/provincia")
+	public PiramidePoblacional obtenerPiramideXprovincia(@RequestBody Map<String,String> body) {
+		String nombre = body.get("Provincia");
+		return serviceGore.obtenerPiramideXprovincia(nombre);
 	}
 }

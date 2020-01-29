@@ -13,6 +13,7 @@ import cl.usach.fingesoft.data.Area;
 import cl.usach.fingesoft.data.Escolaridad;
 import cl.usach.fingesoft.data.GrupoEtario;
 import cl.usach.fingesoft.data.PaisProcedencia;
+import cl.usach.fingesoft.data.PiramidePoblacional;
 import cl.usach.fingesoft.data.PuebloOriginario;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Circunscripcion;
@@ -66,5 +67,11 @@ public class SenadorController {
 	public Escolaridad obtenerEscolaridad(@RequestBody Map<String,String> body) {
 		String numero = body.get("Circunscripcion");
 		return serviceSenador.obtenerEscolaridad(Integer.parseInt(numero));
+	}
+	
+	@PostMapping("/piramide/circunscripcion")
+	public PiramidePoblacional obtenerPiramide(@RequestBody Map<String,String> body) {
+		String numero = body.get("Circunscripcion");
+		return serviceSenador.obtenerPiramide(Integer.parseInt(numero));
 	}
 }

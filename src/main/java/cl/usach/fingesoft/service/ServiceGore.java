@@ -9,6 +9,7 @@ import cl.usach.fingesoft.data.Area;
 import cl.usach.fingesoft.data.Escolaridad;
 import cl.usach.fingesoft.data.GrupoEtario;
 import cl.usach.fingesoft.data.PaisProcedencia;
+import cl.usach.fingesoft.data.PiramidePoblacional;
 import cl.usach.fingesoft.data.PuebloOriginario;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Hogar;
@@ -47,6 +48,9 @@ public class ServiceGore {
 	
 	@Autowired
 	private Escolaridad escolaridad;
+	
+	@Autowired
+	private PiramidePoblacional piramide;
 	
 	
 	public Provincia getProvinciaByNombre(String nombre) {
@@ -131,4 +135,15 @@ public class ServiceGore {
 		return escolaridad.calcuarEscolaridadPorComunas(nuevaProv.getListaComunas());
 	}
 	
+	public PiramidePoblacional obtenerPiramide(String region) {
+		Region nuevaReg = repoRegion.findDatos(region);
+		nuevaReg = repoRegion.findProvincias(nuevaReg);
+		return piramide.calcularPiramidePorProvincias(nuevaReg.getListaProvincias());
+	}
+	
+	public PiramidePoblacional obtenerPiramideXprovincia(String provincia) {
+		Provincia nuevaProv = repoProvincia.findDatos(provincia);
+		nuevaProv = repoProvincia.findComunas(nuevaProv);
+		return piramide.calcularPiramidePorComunas(nuevaProv.getListaComunas());
+	}
 }

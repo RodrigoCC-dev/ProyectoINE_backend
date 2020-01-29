@@ -13,6 +13,7 @@ import cl.usach.fingesoft.data.Area;
 import cl.usach.fingesoft.data.Escolaridad;
 import cl.usach.fingesoft.data.GrupoEtario;
 import cl.usach.fingesoft.data.PaisProcedencia;
+import cl.usach.fingesoft.data.PiramidePoblacional;
 import cl.usach.fingesoft.data.PuebloOriginario;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Distrito;
@@ -66,5 +67,11 @@ public class DiputadoController {
 	public Escolaridad obtenerEscolaridad(@RequestBody Map<String,String> body) {
 		String numero = body.get("Distrito");
 		return serviceDiputado.obtenerEscolaridad(Integer.parseInt(numero));
+	}
+	
+	@PostMapping("/piramide/distrito")
+	public PiramidePoblacional obtenerPiramide(@RequestBody Map<String,String> body) {
+		String numero = body.get("Distrito");
+		return serviceDiputado.obtenerPiramide(Integer.parseInt(numero));
 	}
 }

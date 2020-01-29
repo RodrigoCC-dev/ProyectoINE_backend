@@ -15,6 +15,7 @@ import cl.usach.fingesoft.data.Area;
 import cl.usach.fingesoft.data.Escolaridad;
 import cl.usach.fingesoft.data.GrupoEtario;
 import cl.usach.fingesoft.data.PaisProcedencia;
+import cl.usach.fingesoft.data.PiramidePoblacional;
 import cl.usach.fingesoft.data.PuebloOriginario;
 import cl.usach.fingesoft.data.TipologiaHogar;
 import cl.usach.fingesoft.model.Comuna;
@@ -118,6 +119,19 @@ public class AlcaldeController {
 		String comuna = body.get("Comuna");
 		String localidad = body.get("Localidad");
 		return serviceAlcalde.obtenerEscolaridadXsector(comuna, localidad);
+	}
+	
+	@PostMapping("/piramide/comuna")
+	public PiramidePoblacional obtenerPiramide(@RequestBody Map<String,String> body) {
+		String comuna = body.get("Comuna");
+		return serviceAlcalde.obtenerPiramide(comuna);
+	}
+	
+	@PostMapping("/piramide/localidad")
+	public PiramidePoblacional obtenerPiramideXsector(@RequestBody Map<String,String> body) {
+		String comuna = body.get("Comuna");
+		String localidad = body.get("Localidad");
+		return serviceAlcalde.obtenerPiramideXsector(comuna, localidad);
 	}
 	
 	//Test//
