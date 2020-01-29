@@ -1,7 +1,8 @@
 #!/bin/bash
 
+cd /
 
-rm -r "Datos Censo 2017"
+rm -r Datos_Censo_2017
 
 wget https://datosabiertos.ine.cl/datasets/187198-microdatos-censo-2017-viviendas.download/
 
@@ -15,15 +16,15 @@ wget https://datosabiertos.ine.cl/datasets/187197-microdatos-censo-2017-hogares.
 
 mv -v index.html Hogares.zip
 
-mkdir "Datos Censo 2017"
+mkdir Datos_Censo_2017
 
-mv -v Hogares.zip "Datos Censo 2017"
+mv -v Hogares.zip Datos_Censo_2017
 
-mv -v Personas.zip "Datos Censo 2017"
+mv -v Personas.zip Datos_Censo_2017
 
-mv -v Viviendas.zip "Datos Censo 2017"
+mv -v Viviendas.zip Datos_Censo_2017
 
-cp ProyectoINE_backend/src/main/resources/static/Division_Politica-Chile.csv "Datos Censo 2017/Division_Politica-Chile.csv"
+cp ~/ProyectoINE_backend/src/main/resources/static/Division_Politica-Chile.csv /Datos_Censo_2017/Division_Politica-Chile.csv
 
 cd Dat*
 
@@ -41,7 +42,7 @@ rm Viviendas.zip
 
 cd ..
 
-cd Proy*
+cd ~/Proy*
 
 mvn clean test package
 
