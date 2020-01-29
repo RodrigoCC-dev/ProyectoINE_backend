@@ -24,7 +24,7 @@ mv -v Personas.zip "Datos Censo 2017"
 
 mv -v Viviendas.zip "Datos Censo 2017"
 
-cp /home/rcastillo/ProyectoINE_backend/src/main/resources/static/Division_Politica-Chile.csv "/home/rcastillo/Datos Censo 2017/Division_Politica-Chile.csv"
+cp ProyectoINE_backend/src/main/resources/static/Division_Politica-Chile.csv "Datos Censo 2017/Division_Politica-Chile.csv"
 
 cd Dat*
 
